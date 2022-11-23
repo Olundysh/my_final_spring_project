@@ -1,13 +1,19 @@
-package com.example.springSecurityApplication.controllers;
+package com.example.springSecurityApplication.controllers.user;
 
-import com.example.springSecurityApplication.security.PersonDetails;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import com.example.springSecurityApplication.services.ProductService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class MainController {
+public class UserController {
+
+    private final ProductService productService;
+
+    public UserController(ProductService productService) {
+        this.productService = productService;
+    }
+
     @GetMapping("/index")
     public String index() {
 
@@ -18,6 +24,14 @@ public class MainController {
 //        System.out.println("ID пользователя: " + personDetails.getPerson().getId());
 //        System.out.println("Логин пользователя: " + personDetails.getPerson().getLogin());
 //        System.out.println("Пароль пользователя: " + personDetails.getPerson().getPassword());
-        return "index";
+        return "user/index";
     }
+
+    @GetMapping("/product")
+    public String getAllProduct(Model model) {
+        model.addAttribute("products", productService.getAllProduct());
+        return "/product/product";
+    }
+
+
 }

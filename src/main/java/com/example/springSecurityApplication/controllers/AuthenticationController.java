@@ -52,6 +52,13 @@ public class AuthenticationController {
         personService.register(person);
         return "redirect:/index";
     }
+
+    @Controller
+    public static class ProductController {
+        public String products() {
+            return "product/product";
+        }
+    }
 }
 //http:localhost:8080/authentication/login
 

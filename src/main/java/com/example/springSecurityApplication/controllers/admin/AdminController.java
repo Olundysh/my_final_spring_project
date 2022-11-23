@@ -1,4 +1,4 @@
-package com.example.springSecurityApplication.controllers;
+package com.example.springSecurityApplication.controllers.admin;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
