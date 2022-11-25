@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Список товаров</title>
 </head>
 <body>
 <h3>Доступные товары: </h3>
+<hr>
 <div th:each="product : ${products}">
-    <p th:text="'Наименование: ' + ${product.getTitle()}"></p>
-    <p th:text="'Описание: ' + ${product.getDescription()}"></p>
+    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+    <br>
+    <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
     <p th:text="'Цена: ' + ${product.getPrice()}"></p>
-    <p th:text="'Город: ' + ${product.getCity()}"></p>
-    <p th:text="'Продавец: ' + ${product.getSeller()}"></p>
+    <hr>
 </div>
 </body>
 </html>

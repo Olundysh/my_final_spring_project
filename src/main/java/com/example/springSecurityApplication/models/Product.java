@@ -1,20 +1,55 @@
 package com.example.springSecurityApplication.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Product {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "title", nullable = false, columnDefinition = "text", unique = true)
+    @NotEmpty(message = "Наименование товара не может быть пустым")
     private String title;
+
+    @Column(name = "description", nullable = false, columnDefinition = "text")
+    @NotEmpty(message = "Описание товара не может быть пустым")
     private String description;
+
+    @Column(name = "price", nullable = false)
+    @Min(value = 1, message = "Цена не может быть отрицательной или нулевой")
     private float price;
-    private String city;
+
+    @Column(name = "warehouse", nullable = false)
+    @NotEmpty(message = "Склад по нахождению товара не может быть пустым")
+    private String warehouse;
+
+    @Column(name = "seller", nullable = false,columnDefinition = "text")
+    @NotEmpty(message = "Информация о продавце не может быть пустым")
     private String seller;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
+    private List<Image> imageList = new ArrayList<>();
+    private LocalDateTime dateTime;
+
+    // Будем заполнять дату и время при создании объекта класса
+    @PrePersist
+    private void init(){
+        dateTime = LocalDateTime.now();
+    }
+
+    // Метод по добавлению фотографий в лист к текущему продукту
+    public void addImageToProduct(Image image){
+        image.setProduct(this);
+        imageList.add(image);
+    }
 
     public Integer getId() {
         return id;
@@ -48,12 +83,12 @@ public class Product {
         this.price = price;
     }
 
-    public String getCity() {
-        return city;
+    public String getWarehouse() {
+        return warehouse;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setWarehouse(String warehouse) {
+        this.warehouse = warehouse;
     }
 
     public String getSeller() {
@@ -64,15 +99,20 @@ public class Product {
         this.seller = seller;
     }
 
-    public Product(int id, String title, String description, float price, String city, String seller) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.city = city;
-        this.seller = seller;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public Product() {
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public List<Image> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<Image> imageList) {
+        this.imageList = imageList;
     }
 }
+

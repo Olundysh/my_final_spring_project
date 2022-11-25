@@ -41,9 +41,11 @@ public class ProductService {
     @Transactional
     public void updateProduct(int id, Product product) {
         product.setId(id);
+        productRepository.save(product);
     }
 
-   //Данный метод позволяет удалить товар по id
+    //Данный метод позволяет удалить товар по id
+    @Transactional
     public void deleteProduct(int id) {
         productRepository.deleteById(id);
     }
