@@ -2,9 +2,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+
+  <link rel="stylesheet" type="text/css" th:href="@{/css/shared.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/product.css}">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+          href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;700&display=swap"
+          rel="stylesheet"
+  />
   <title>Редактирование товаров</title>
 </head>
 <body>
+<header>
+  <h1 class="logo">TOCHMAC</h1>
+  <nav>
+    <button class="nav_item" href="#">
+      FAVOURITIES
+    </button>
+    <form method="post" th:action="@{/logout}">
+      <input type="submit" class=nav_item value="Выйти из личного кабинета">
+    </form>
+  </nav>
+</header>
 <h3>Редактирование товаров</h3>
 <form th:method="POST" th:action="@{/admin/product/edit/{id}(id=${product.getId()})}" th:object="${product}">
   <label for="title">Введите наименование товара: </label>
@@ -34,5 +54,13 @@
   <br>
   <input type="submit" value="Редактировать">
 </form>
+<footer>
+  <div class="footerLogo">TOCHMAC</div>
+  <p>
+    śanmausa ñäkcyeṃ yetweṃtsa yaitu vājr eṃṅku ṣarnene • ylaiñäktñe weṣsa karpāsta wrocce telkine
+    <br />
+    wismai klyautkasta brāhmaññai wertsyai po śaiṣṣe • yāṯaṣṣeñcai ilaiñakteṃ po ylaiñäktents āṣtsa pralyu yparwe
+  </p>
+</footer>
 </body>
 </html>

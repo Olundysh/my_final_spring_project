@@ -2,16 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Главная страница</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;700&display=swap"
+            rel="stylesheet"
+    />
     <link rel="stylesheet" type="text/css" th:href="@{/css/shared.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+    <title>Главная страница</title>
 </head>
 <body>
+<header>
+    <h1 class="logo">TOCHMAC</h1>
+    <nav>
+        <button class="nav_item" href="#">
+            FAVOURITIES
+        </button>
+        <form method="post" th:action="@{/logout}">
+            <input type="submit" class=nav_item value="Выйти из личного кабинета">
+        </form>
+    </nav>
+</header>
+<div class="banner_section">
+    <div class="banner">
+        <p class="text_banner">
+            Tocharian <br /> <span>manuscript culture</span>
+            <br />
+            <button class="banner_btn">Learn more</button>
+        </p>
+    </div>
+</div>
 <h3>Главная страница магазина</h3>
-<form method="post" th:action="@{/logout}">
-    <input type="submit" value="Выйти из личного кабинета">
-    <a href="/product">Список товаров</a>
-</form>
+
+<a href="/product">Список товаров</a>
+<footer>
+    <div class="footerLogo">TOCHMAC</div>
+    <p>
+        śanmausa ñäkcyeṃ yetweṃtsa yaitu vājr eṃṅku ṣarnene • ylaiñäktñe weṣsa karpāsta wrocce telkine
+        <br />
+        wismai klyautkasta brāhmaññai wertsyai po śaiṣṣe • yāṯaṣṣeñcai ilaiñakteṃ po ylaiñäktents āṣtsa pralyu yparwe
+    </p>
+</footer>
 
 <script th:src="@{/js/index.js}" ></script>
 </body>
