@@ -2,6 +2,7 @@ package com.example.springSecurityApplication.controllers.admin;
 
 import com.example.springSecurityApplication.models.Image;
 import com.example.springSecurityApplication.models.Product;
+import com.example.springSecurityApplication.repositories.CategoryRepository;
 import com.example.springSecurityApplication.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Pattern;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -27,9 +27,12 @@ public class AdminController {
 
     private final ProductService productService;
 
+    private final CategoryRepository categoryRepository;
+
     @Autowired
-    public AdminController(ProductService productService) {
+    public AdminController(ProductService productService, CategoryRepository categoryRepository) {
         this.productService = productService;
+        this.categoryRepository = categoryRepository;
     }
 
     //    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
@@ -44,6 +47,7 @@ public class AdminController {
     @GetMapping("/product/add")
     public String addProduct(Model model){
         model.addAttribute("product", new Product());
+        model.addAttribute("category", categoryRepository.findAll());
         return "product/addProduct";
     }
 
@@ -144,6 +148,7 @@ public class AdminController {
     @GetMapping("/product/edit/{id}")
     public String editProduct(Model model, @PathVariable("id") int id){
         model.addAttribute("product", productService.getProductId(id));
+        model.addAttribute("category", categoryRepository.findAll());
         return "product/editProduct";
     }
 
@@ -161,4 +166,3 @@ public class AdminController {
 
 
 }
-

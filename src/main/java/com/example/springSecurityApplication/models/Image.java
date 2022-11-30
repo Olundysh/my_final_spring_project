@@ -2,8 +2,6 @@ package com.example.springSecurityApplication.models;
 
 import javax.persistence.*;
 
-import javax.persistence.*;
-
 @Entity
 public class Image {
     @Id

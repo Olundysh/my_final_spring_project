@@ -62,4 +62,3 @@ public class AuthenticationController {
 }
 //http:localhost:8080/authentication/login
 
-

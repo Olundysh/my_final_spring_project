@@ -77,6 +77,7 @@ body {
     min-height: 100%;
     font-family: 'Cormorant SC', serif, source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+
 }
 
 header{
@@ -84,6 +85,8 @@ header{
     grid-template-columns: 2fr 1fr;
     background-color: rgb(22, 21, 21);
     padding: 20px 50px;
+    position: fixed;
+    top: 0;
 }
 
 nav{
@@ -118,6 +121,15 @@ nav{
     color: rgb(52, 83, 52);
 }
 
+
+main{
+    display: grid;
+    grid-template-columns: 1fr;
+    /*overflow: scroll;*/
+    position: relative;
+    min-height: calc(100vh - 150px);
+    margin: 8rem auto;
+}
 .banner_section{
     display: grid;
     grid-template-columns: 1fr;
@@ -177,6 +189,7 @@ nav{
 footer {
     display: grid;
     grid-template-columns: 1fr 2fr;
+    height: 150px;
     padding: 0 30px;
     background-color: black;
     align-items: center;

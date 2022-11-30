@@ -39,11 +39,21 @@ public class Product {
     private List<Image> imageList = new ArrayList<>();
     private LocalDateTime dateTime;
 
+    @ManyToOne(optional = false)
+    private Category category;
+
     // Будем заполнять дату и время при создании объекта класса
     @PrePersist
     private void init(){
         dateTime = LocalDateTime.now();
     }
+
+    @ManyToMany()
+    @JoinTable(name = "product_cart", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "person_id"))
+    private List<Person> personList;
+
+    @OneToMany(mappedBy = "product")
+    private List<Order> orderList;
 
     // Метод по добавлению фотографий в лист к текущему продукту
     public void addImageToProduct(Image image){
@@ -113,6 +123,14 @@ public class Product {
 
     public void setImageList(List<Image> imageList) {
         this.imageList = imageList;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
 
