@@ -3,8 +3,8 @@ package com.example.springSecurityApplication.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "manuscript_cart")
-public class Cart {
+@Table(name = "manuscript_favourites")
+public class Favourites {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -16,12 +16,12 @@ public class Cart {
     private int manuscriptId;
 
 
-    public Cart(int personId, int manuscriptId) {
+    public Favourites(int personId, int manuscriptId) {
         this.personId = personId;
         this.manuscriptId = manuscriptId;
     }
 
-    public Cart() {
+    public Favourites() {
     }
 
     public int getId() {

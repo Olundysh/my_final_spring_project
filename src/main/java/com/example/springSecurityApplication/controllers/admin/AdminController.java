@@ -144,7 +144,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    // Метод по отображению страницы с возможностью редактирования товаров
+    // Метод по отображению страницы с возможностью редактирования рукописей
     @GetMapping("/manuscript/edit/{id}")
     public String editManuscript(Model model, @PathVariable("id") int id){
         model.addAttribute("manuscript", manuscriptService.getManuscriptId(id));
@@ -152,7 +152,7 @@ public class AdminController {
         return "editManuscript";
     }
 
-    // Метод по редактированию товара
+    // Метод по редактированию рукописи
     @PostMapping("/manuscript/edit/{id}")
     public String editManuscript(@ModelAttribute("manuscript") @Valid Manuscript manuscript, BindingResult bindingResult, @PathVariable("id") int id){
         if(bindingResult.hasErrors())

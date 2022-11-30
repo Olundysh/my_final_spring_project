@@ -39,7 +39,7 @@
     <input type="submit" value="Выйти из личного кабинета">
 </form>
 <br>
-<form method="get" th:action="@{/cart}">
+<form method="get" th:action="@{/favourites}">
     <input type="submit" value="Корзина">
 </form>
 
@@ -90,7 +90,7 @@
     <br>
     <a th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}" th:text="${manuscript.getTitle()}"></a>
     <p th:text="'Цена: ' + ${manuscript.getPrice()}"></p>
-    <a th:href="@{/cart/add/{id}(id=${manuscript.getId()})}">Добавить в корзину</a>
+    <a th:href="@{/favourites/add/{id}(id=${manuscript.getId()})}">Добавить в корзину</a>
     <hr>
 </div>
 </main>

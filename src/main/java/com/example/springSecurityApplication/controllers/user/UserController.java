@@ -1,10 +1,10 @@
 package com.example.springSecurityApplication.controllers.user;
 
 import com.example.springSecurityApplication.enumm.Status;
-import com.example.springSecurityApplication.models.Cart;
+import com.example.springSecurityApplication.models.Favourites;
 import com.example.springSecurityApplication.models.Manuscript;
 import com.example.springSecurityApplication.models.Order;
-import com.example.springSecurityApplication.repositories.CartRepository;
+import com.example.springSecurityApplication.repositories.FavouritesRepository;
 import com.example.springSecurityApplication.repositories.OrderRepository;
 import com.example.springSecurityApplication.security.PersonDetails;
 import com.example.springSecurityApplication.services.ManuscriptService;
@@ -23,13 +23,13 @@ import java.util.UUID;
 public class UserController {
 
     private final OrderRepository orderRepository;
-    private final CartRepository cartRepository;
+    private final FavouritesRepository favouritesRepository;
 
     private final ManuscriptService manuscriptService;
 
-    public UserController(OrderRepository orderRepository, CartRepository cartRepository, ManuscriptService manuscriptService) {
+    public UserController(OrderRepository orderRepository, FavouritesRepository favouritesRepository, ManuscriptService manuscriptService) {
         this.orderRepository = orderRepository;
-        this.cartRepository = cartRepository;
+        this.favouritesRepository = favouritesRepository;
         this.manuscriptService = manuscriptService;
     }
 
@@ -49,26 +49,26 @@ public class UserController {
         return "user/index";
     }
 
-    @GetMapping("/cart/add/{id}")
-    public String addManuscriptInCart(@PathVariable("id") int id, Model model){
+    @GetMapping("/favourites/add/{id}")
+    public String addManuscriptInFavourites(@PathVariable("id") int id, Model model){
         Manuscript manuscript = manuscriptService.getManuscriptId(id);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
         int id_person = personDetails.getPerson().getId();
-        Cart cart = new Cart(id_person, manuscript.getId());
-        cartRepository.save(cart);
-        return "redirect:/cart";
+        Favourites favourites = new Favourites(id_person, manuscript.getId());
+        favouritesRepository.save(favourites);
+        return "redirect:/favourites";
     }
 
-    @GetMapping("/cart")
-    public String cart(Model model){
+    @GetMapping("/favourites")
+    public String favourites(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
         int id_person = personDetails.getPerson().getId();
-        List<Cart> cartList = cartRepository.findByPersonId(id_person);
+        List<Favourites> favouritesList = favouritesRepository.findByPersonId(id_person);
         List<Manuscript> manuscriptsList = new ArrayList<>();
-        for (Cart cart: cartList) {
-            manuscriptsList.add(manuscriptService.getManuscriptId(cart.getManuscriptId()));
+        for (Favourites favourites : favouritesList) {
+            manuscriptsList.add(manuscriptService.getManuscriptId(favourites.getManuscriptId()));
         }
 
         float price = 0;
@@ -76,17 +76,17 @@ public class UserController {
             price += manuscript.getPrice();
         }
         model.addAttribute("price", price);
-        model.addAttribute("cart_manuscript", manuscriptsList);
-        return "user/cart";
+        model.addAttribute("favourites_manuscript", manuscriptsList);
+        return "user/favourites";
     }
 
-    @GetMapping("/cart/delete/{id}")
-    public String deleteManuscriptCart(Model model, @PathVariable("id") int id){
+    @GetMapping("/favourites/delete/{id}")
+    public String deleteManuscriptFavourites(Model model, @PathVariable("id") int id){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
         int id_person = personDetails.getPerson().getId();
-        cartRepository.deleteCartByManuscriptId(id);
-        return "redirect:/cart";
+        favouritesRepository.deleteFavouritesByManuscriptId(id);
+        return "redirect:/favourites";
     }
 
     @GetMapping("/order/create")
@@ -94,11 +94,11 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
         int id_person = personDetails.getPerson().getId();
-        List<Cart> cartList = cartRepository.findByPersonId(id_person);
+        List<Favourites> favouritesList = favouritesRepository.findByPersonId(id_person);
         List<Manuscript> manuscriptsList = new ArrayList<>();
         // Получаем продукты из корзины по id
-        for (Cart cart: cartList) {
-            manuscriptsList.add(manuscriptService.getManuscriptId(cart.getManuscriptId()));
+        for (Favourites favourites : favouritesList) {
+            manuscriptsList.add(manuscriptService.getManuscriptId(favourites.getManuscriptId()));
         }
 
         float price = 0;
@@ -110,7 +110,7 @@ public class UserController {
         for (Manuscript manuscript : manuscriptsList){
             Order newOrder = new Order(uuid, manuscript, personDetails.getPerson(), 1, manuscript.getPrice(), Status.Получен);
             orderRepository.save(newOrder);
-            cartRepository.deleteCartByManuscriptId(manuscript.getId());
+            favouritesRepository.deleteFavouritesByManuscriptId(manuscript.getId());
         }
         return "redirect:/orders";
     }

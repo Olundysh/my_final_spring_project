@@ -48,7 +48,7 @@ public class Manuscript {
     }
 
     @ManyToMany()
-    @JoinTable(name = "manuscript_cart", joinColumns = @JoinColumn(name = "manuscript_id"), inverseJoinColumns = @JoinColumn(name = "person_id"))
+    @JoinTable(name = "manuscript_favourites", joinColumns = @JoinColumn(name = "manuscript_id"), inverseJoinColumns = @JoinColumn(name = "person_id"))
     private List<Person> personList;
 
     @OneToMany(mappedBy = "manuscript")

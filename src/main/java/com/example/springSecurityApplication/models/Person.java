@@ -30,7 +30,7 @@ public class Person {
     private String role;
 
     @ManyToMany()
-    @JoinTable(name = "manuscript_cart", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "manuscript_id"))
+    @JoinTable(name = "manuscript_favourites", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "manuscript_id"))
     private List<Manuscript> manuscript;
 
     @OneToMany(mappedBy = "person")
