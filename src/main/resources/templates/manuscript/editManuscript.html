@@ -38,19 +38,19 @@
     <div style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
     <br>
     <br>
-    <label for="price">Введите цену товара: </label>
-    <input type="number" th:field="*{price}" min="1" step="0.00" id="price">
-    <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+    <label for="dating">Введите цену товара: </label>
+    <input type="number" th:field="*{dating}" min="1" step="0.00" id="dating">
+    <div style="color: red" th:if="${#fields.hasErrors('dating')}" th:errors="*{dating}"></div>
     <br>
     <br>
-    <label for="warehouse">Введите склад: </label>
-    <input type="text" th:field="*{warehouse}" placeholder="Склад" id="warehouse">
-    <div style="color: red" th:if="${#fields.hasErrors('warehouse')}" th:errors="*{warehouse}"></div>
+    <label for="collection">Введите склад: </label>
+    <input type="text" th:field="*{collection}" placeholder="Склад" id="collection">
+    <div style="color: red" th:if="${#fields.hasErrors('collection')}" th:errors="*{collection}"></div>
     <br>
     <br>
-    <label for="seller">Введите данные о продавце: </label>
-    <textarea th:field="*{seller}" placeholder="Продавец" id="seller"></textarea>
-    <div style="color: red" th:if="${#fields.hasErrors('seller')}" th:errors="*{seller}"></div>
+    <label for="publications">Введите данные о продавце: </label>
+    <textarea th:field="*{publications}" placeholder="Продавец" id="publications"></textarea>
+    <div style="color: red" th:if="${#fields.hasErrors('publications')}" th:errors="*{publications}"></div>
     <br>
     <br>
     <label for="category">Введите категорию товара: </label>

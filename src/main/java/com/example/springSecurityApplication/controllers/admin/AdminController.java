@@ -48,7 +48,7 @@ public class AdminController {
     public String addManuscript(Model model){
         model.addAttribute("manuscript", new Manuscript());
         model.addAttribute("category", categoryRepository.findAll());
-        return "addManuscript";
+        return "manuscript/addManuscript";
     }
 
     // Метод по добавлению продукта в БД через сервис->репозиторий
@@ -56,7 +56,7 @@ public class AdminController {
     public String addManuscript(@ModelAttribute("manuscript") @Valid Manuscript manuscript, BindingResult bindingResult, @RequestParam("file_one")MultipartFile file_one, @RequestParam("file_two")MultipartFile file_two, @RequestParam("file_three")MultipartFile file_three, @RequestParam("file_four")MultipartFile file_four, @RequestParam("file_five") MultipartFile file_five) throws IOException {
         if(bindingResult.hasErrors())
         {
-            return "addManuscript";
+            return "manuscript/addManuscript";
         }
 
         if(file_one != null)
@@ -149,7 +149,7 @@ public class AdminController {
     public String editManuscript(Model model, @PathVariable("id") int id){
         model.addAttribute("manuscript", manuscriptService.getManuscriptId(id));
         model.addAttribute("category", categoryRepository.findAll());
-        return "editManuscript";
+        return "manuscript/editManuscript";
     }
 
     // Метод по редактированию рукописи
@@ -157,7 +157,7 @@ public class AdminController {
     public String editManuscript(@ModelAttribute("manuscript") @Valid Manuscript manuscript, BindingResult bindingResult, @PathVariable("id") int id){
         if(bindingResult.hasErrors())
         {
-            return "editManuscript";
+            return "manuscript/editManuscript";
         }
         manuscriptService.updateManuscript(id, manuscript);
         return "redirect:/admin";

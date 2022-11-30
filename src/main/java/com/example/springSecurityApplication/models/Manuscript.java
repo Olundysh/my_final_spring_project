@@ -22,17 +22,17 @@ public class Manuscript {
     @NotEmpty(message = "Описание товара не может быть пустым")
     private String description;
 
-    @Column(name = "price", nullable = false)
+    @Column(name = "dating", nullable = false)
     @Min(value = 1, message = "Цена не может быть отрицательной или нулевой")
-    private float price;
+    private int dating;
 
-    @Column(name = "warehouse", nullable = false)
+    @Column(name = "collection", nullable = false)
     @NotEmpty(message = "Склад по нахождению товара не может быть пустым")
-    private String warehouse;
+    private String collection;
 
-    @Column(name = "seller", nullable = false,columnDefinition = "text")
+    @Column(name = "publications", nullable = false,columnDefinition = "text")
     @NotEmpty(message = "Информация о продавце не может быть пустым")
-    private String seller;
+    private String publications;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "manuscript")
     private List<Image> imageList = new ArrayList<>();
@@ -52,7 +52,7 @@ public class Manuscript {
     private List<Person> personList;
 
     @OneToMany(mappedBy = "manuscript")
-    private List<Order> orderList;
+    private List<Selection> selectionList;
 
     // Метод по добавлению фотографий в лист к текущему продукту
     public void addImageToManuscript(Image image){
@@ -84,28 +84,28 @@ public class Manuscript {
         this.description = description;
     }
 
-    public float getPrice() {
-        return price;
+    public int getDating() {
+        return dating;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
+    public void setDating(int dating) {
+        this.dating = dating;
     }
 
-    public String getWarehouse() {
-        return warehouse;
+    public String getCollection() {
+        return collection;
     }
 
-    public void setWarehouse(String warehouse) {
-        this.warehouse = warehouse;
+    public void setCollection(String collection) {
+        this.collection = collection;
     }
 
-    public String getSeller() {
-        return seller;
+    public String getPublications() {
+        return publications;
     }
 
-    public void setSeller(String seller) {
-        this.seller = seller;
+    public void setPublications(String publications) {
+        this.publications = publications;
     }
 
     public LocalDateTime getDateTime() {

@@ -33,9 +33,9 @@
 <div th:each="manuscript : ${manuscripts}">
     <p th:text="'Наименование: ' + ${manuscript.getTitle()}"></p>
     <p th:text="'Описание: ' + ${manuscript.getDescription()}"></p>
-    <p th:text="'Цена: ' + ${manuscript.getPrice()}"></p>
-    <p th:text="'Склад: ' + ${manuscript.getWarehouse()}"></p>
-    <p th:text="'Продавец: ' + ${manuscript.getSeller()}"></p>
+    <p th:text="'Датировка: ' + ${manuscript.getDating()}"></p>
+    <p th:text="'Склад: ' + ${manuscript.getCollection()}"></p>
+    <p th:text="'Продавец: ' + ${manuscript.getPublications()}"></p>
     <a th:href="@{/admin/manuscript/edit/{id}(id=${manuscript.getId()})}">Редактировать товар</a>
     <a th:href="@{/admin/manuscript/delete/{id}(id=${manuscript.getId()})}">Удалить товар</a>
     <hr>

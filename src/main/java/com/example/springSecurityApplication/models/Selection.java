@@ -6,8 +6,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "orders")
-public class Order {
+@Table(name = "selection")
+public class Selection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -21,7 +21,7 @@ public class Order {
     private Person person;
 
     private int count;
-    private float price;
+    private int dating;
 
     private LocalDateTime dateTime;
 
@@ -65,12 +65,12 @@ public class Order {
         this.count = count;
     }
 
-    public float getPrice() {
-        return price;
+    public int getDating() {
+        return dating;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
+    public void setDating(int dating) {
+        this.dating = dating;
     }
 
     public Status getStatus() {
@@ -81,15 +81,15 @@ public class Order {
         this.status = status;
     }
 
-    public Order() {
+    public Selection() {
     }
 
-    public Order(String number, Manuscript manuscript, Person person, int count, float price, Status status) {
+    public Selection(String number, Manuscript manuscript, Person person, int count, int dating, Status status) {
         this.number = number;
         this.manuscript = manuscript;
         this.person = person;
         this.count = count;
-        this.price = price;
+        this.dating = dating;
         this.status = status;
     }
 

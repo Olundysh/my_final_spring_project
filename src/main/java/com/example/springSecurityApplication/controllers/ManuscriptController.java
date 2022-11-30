@@ -33,35 +33,35 @@ public class ManuscriptController {
     }
 
     @PostMapping("/search")
-    public String manuscriptSearch(@RequestParam("search") String search, @RequestParam("ot") String ot, @RequestParam("do") String Do, @RequestParam(value = "price", required = false, defaultValue = "")String price, @RequestParam(value = "contact", required = false, defaultValue = "")String contact, Model model){
+    public String manuscriptSearch(@RequestParam("search") String search, @RequestParam("ot") String ot, @RequestParam("do") String Do, @RequestParam(value = "dating", required = false, defaultValue = "")String dating, @RequestParam(value = "contact", required = false, defaultValue = "")String contact, Model model){
         if(!ot.isEmpty() & !Do.isEmpty()){
-            if(!price.isEmpty()){
-                if(price.equals("sorted_by_ascending_price")){
+            if(!dating.isEmpty()){
+                if(dating.equals("sorted_by_ascending_dating")){
                     if(!contact.isEmpty())
                     {
                         if(contact.equals("furniture")){
-                            model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByPriceAsc(search.toLowerCase(), Float.parseFloat(ot), Float.parseFloat(Do), 1));
+                            model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByDatingAsc(search.toLowerCase(), Integer.parseInt(ot), Integer.parseInt(Do), 1));
                         } else if(contact.equals("appliances")){
-                            model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByPriceAsc(search.toLowerCase(), Float.parseFloat(ot), Float.parseFloat(Do), 2));
+                            model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByDatingAsc(search.toLowerCase(), Integer.parseInt(ot), Integer.parseInt(Do), 2));
                         }else if(contact.equals("clothes")){
-                            model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByPriceAsc(search.toLowerCase(), Float.parseFloat(ot), Float.parseFloat(Do), 3));
+                            model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByDatingAsc(search.toLowerCase(), Integer.parseInt(ot), Integer.parseInt(Do), 3));
                         }
                     }
                 }
-                else if (price.equals("sorted_by_descending_price")){
+                else if (dating.equals("sorted_by_descending_dating")){
                     if(!contact.isEmpty())
                     {
                         if(contact.equals("furniture")){
-                            model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByPriceDesc(search.toLowerCase(), Float.parseFloat(ot), Float.parseFloat(Do), 1));
+                            model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByDatingDesc(search.toLowerCase(), Integer.parseInt(ot), Integer.parseInt(Do), 1));
                         } else if(contact.equals("appliances")){
-                            model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByPriceDesc(search.toLowerCase(), Float.parseFloat(ot), Float.parseFloat(Do), 2));
+                            model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByDatingDesc(search.toLowerCase(), Integer.parseInt(ot), Integer.parseInt(Do), 2));
                         }else if(contact.equals("clothes")){
-                            model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByPriceDesc(search.toLowerCase(), Float.parseFloat(ot), Float.parseFloat(Do), 3));
+                            model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByDatingDesc(search.toLowerCase(), Integer.parseInt(ot), Integer.parseInt(Do), 3));
                         }
                     }
                 }
             } else {
-                model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndPriceGreaterThanEqualAndPriceLessThanEqual(search, Float.parseFloat(ot), Float.parseFloat(Do)));
+                model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndDatingGreaterThanEqualAndDatingLessThanEqual(search, Integer.parseInt(ot), Integer.parseInt(Do)));
 
             }
         }
@@ -70,8 +70,8 @@ public class ManuscriptController {
         }
 
         model.addAttribute("value_search", search);
-        model.addAttribute("value_price_ot", ot);
-        model.addAttribute("value_price_do", Do);
+        model.addAttribute("value_dating_ot", ot);
+        model.addAttribute("value_dating_do", Do);
         model.addAttribute("manuscripts", manuscriptService.getAllManuscript());
         return "manuscript";
 

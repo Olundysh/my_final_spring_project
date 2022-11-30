@@ -34,7 +34,7 @@ public class Person {
     private List<Manuscript> manuscript;
 
     @OneToMany(mappedBy = "person")
-    private List<Order> orderList;
+    private List<Selection> selectionList;
 
     public Person() {
 

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Заказы</title>
+</head>
+<body>
+<h3>Заказы</h3>
+<div th:each="selection : ${selection}">
+  <h3 th:text="'Заказ № ' + ${selection.getNumber()}"></h3>
+  <img th:src="'/img/' + ${selection.getManuscript().imageList[0].getFileName()}" width="300px">
+  <p th:text="'Наименование: ' + ${selection.getManuscript().getTitle()}"></p>
+  <p th:text="'Количество: ' + ${selection.getCount()}"></p>
+  <p th:text="'Цена: ' + ${selection.getDating()}"></p>
+  <p th:text="'Дата заказа: ' + ${#temporals.format(selection.getDateTime(), 'dd-MMM-yyyy')}"></p>
+  <p th:text="'Статус: ' + ${selection.getStatus()}">
+</div>
+</body>
+</html>

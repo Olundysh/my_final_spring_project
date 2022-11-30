@@ -19,12 +19,12 @@
   <img th:src="'/img/' + ${manuscript.imageList[0].getFileName()}" width="300px">
   <br>
   <a th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}" th:text="${manuscript.getTitle()}"></a>
-  <p th:text="'Цена: ' + ${manuscript.getPrice()}"></p>
+  <p th:text="'Цена: ' + ${manuscript.getDating()}"></p>
   <a th:href="@{/favourites/delete/{id}(id=${manuscript.getId()})}">Удалить</a>
   <hr>
 </div>
-<h3 th:text="'Итоговая цена: ' + ${price}"></h3>
-<a href="/order/create">Оформить заказ</a>
+<!--<h3 th:text="'Итого рукописей: ' + ${favourites_manuscript.getCount()}"></h3>-->
+<a href="/selection/create">Оформить заказ</a>
 </main>
 </body>
 </html>

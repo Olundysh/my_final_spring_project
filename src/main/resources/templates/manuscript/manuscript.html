@@ -35,18 +35,18 @@
         <br>
         <p>Цена, ₽</p>
         <label for="ot">От</label>
-        <input type="text" name="ot" id="ot" th:value="*{value_price_ot}">
+        <input type="text" name="ot" id="ot" th:value="*{value_dating_ot}">
         <label for="do">До</label>
-        <input type="text" name="do" id="do" th:value="*{value_price_do}">
+        <input type="text" name="do" id="do" th:value="*{value_dating_do}">
         <br>
         <br>
         <div>
-            <label for="ascending_price">Отсортировать по возрастанию цены</label>
-            <input type="radio" id="ascending_price" name="price" value="sorted_by_ascending_price">
+            <label for="ascending_dating">Отсортировать по возрастанию цены</label>
+            <input type="radio" id="ascending_dating" name="dating" value="sorted_by_ascending_dating">
             <br>
             <br>
-            <label for="descending_price">Отсортировать по убыванию цены</label>
-            <input type="radio" id="descending_price" name="price" value="sorted_by_descending_price">
+            <label for="descending_dating">Отсортировать по убыванию цены</label>
+            <input type="radio" id="descending_dating" name="dating" value="sorted_by_descending_dating">
             <p>Категория товаров: </p>
             <label for="furniture">Мебель</label>
             <input type="radio" id="furniture" name="contact" value="furniture">
@@ -66,7 +66,7 @@
     <img th:src="'/img/' + ${manuscript.imageList[0].getFileName()}" width="300px">
     <br>
     <a th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}" th:text="${manuscript.getTitle()}"></a>
-    <p th:text="'Цена: ' + ${manuscript.getPrice()}"></p>
+    <p th:text="'Датировка: ' + ${manuscript.getDating()}"></p>
     <hr>
 </div>
 <hr>
@@ -76,7 +76,7 @@
     <img th:src="'/img/' + ${manuscript.imageList[0].getFileName()}" width="300px">
     <br>
     <a th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}" th:text="${manuscript.getTitle()}"></a>
-    <p th:text="'Цена: ' + ${manuscript.getPrice()}"></p>
+    <p th:text="'Цена: ' + ${manuscript.getDating()}"></p>
     <hr>
 </div>
 </main>

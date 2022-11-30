@@ -3,9 +3,9 @@ package com.example.springSecurityApplication.controllers.user;
 import com.example.springSecurityApplication.enumm.Status;
 import com.example.springSecurityApplication.models.Favourites;
 import com.example.springSecurityApplication.models.Manuscript;
-import com.example.springSecurityApplication.models.Order;
+import com.example.springSecurityApplication.models.Selection;
 import com.example.springSecurityApplication.repositories.FavouritesRepository;
-import com.example.springSecurityApplication.repositories.OrderRepository;
+import com.example.springSecurityApplication.repositories.SelectionRepository;
 import com.example.springSecurityApplication.security.PersonDetails;
 import com.example.springSecurityApplication.services.ManuscriptService;
 import org.springframework.security.core.Authentication;
@@ -22,13 +22,13 @@ import java.util.UUID;
 @Controller
 public class UserController {
 
-    private final OrderRepository orderRepository;
+    private final SelectionRepository selectionRepository;
     private final FavouritesRepository favouritesRepository;
 
     private final ManuscriptService manuscriptService;
 
-    public UserController(OrderRepository orderRepository, FavouritesRepository favouritesRepository, ManuscriptService manuscriptService) {
-        this.orderRepository = orderRepository;
+    public UserController(SelectionRepository selectionRepository, FavouritesRepository favouritesRepository, ManuscriptService manuscriptService) {
+        this.selectionRepository = selectionRepository;
         this.favouritesRepository = favouritesRepository;
         this.manuscriptService = manuscriptService;
     }
@@ -71,11 +71,11 @@ public class UserController {
             manuscriptsList.add(manuscriptService.getManuscriptId(favourites.getManuscriptId()));
         }
 
-        float price = 0;
+        float dating = 0;
         for (Manuscript manuscript : manuscriptsList) {
-            price += manuscript.getPrice();
+            dating += manuscript.getDating();
         }
-        model.addAttribute("price", price);
+        model.addAttribute("dating", dating);
         model.addAttribute("favourites_manuscript", manuscriptsList);
         return "user/favourites";
     }
@@ -89,8 +89,8 @@ public class UserController {
         return "redirect:/favourites";
     }
 
-    @GetMapping("/order/create")
-    public String order(){
+    @GetMapping("/selection/create")
+    public String selection(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
         int id_person = personDetails.getPerson().getId();
@@ -101,26 +101,26 @@ public class UserController {
             manuscriptsList.add(manuscriptService.getManuscriptId(favourites.getManuscriptId()));
         }
 
-        float price = 0;
+        float dating = 0;
         for (Manuscript manuscript : manuscriptsList){
-            price += manuscript.getPrice();
+            dating += manuscript.getDating();
         }
 
         String uuid = UUID.randomUUID().toString();
         for (Manuscript manuscript : manuscriptsList){
-            Order newOrder = new Order(uuid, manuscript, personDetails.getPerson(), 1, manuscript.getPrice(), Status.Получен);
-            orderRepository.save(newOrder);
+            Selection newSelection = new Selection(uuid, manuscript, personDetails.getPerson(), 1, manuscript.getDating(), Status.Получен);
+            selectionRepository.save(newSelection);
             favouritesRepository.deleteFavouritesByManuscriptId(manuscript.getId());
         }
-        return "redirect:/orders";
+        return "redirect:/selection";
     }
 
-    @GetMapping("/orders")
-    public String ordersUser(Model model){
+    @GetMapping("/selection")
+    public String selectionUser(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
-        List<Order> orderList = orderRepository.findByPerson(personDetails.getPerson());
-        model.addAttribute("orders", orderList);
-        return "/user/orders";
+        List<Selection> selectionList = selectionRepository.findByPerson(personDetails.getPerson());
+        model.addAttribute("selection", selectionList);
+        return "/user/selection";
     }
 }
