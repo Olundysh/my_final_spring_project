@@ -48,7 +48,7 @@
 </form>
 <br>
 <br>
-<form th:method="POST" th:action="@{/product/search}">
+<form th:method="POST" th:action="@{/manuscript/search}">
     <fieldset>
         <legend>Выберите параметр для сортировка: </legend>
         <br>
@@ -85,12 +85,12 @@
 </form>
 <h3>Доступные товары: </h3>
 <hr>
-<div th:each="product : ${products}">
-    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+<div th:each="manuscript : ${manuscripts}">
+    <img th:src="'/img/' + ${manuscript.imageList[0].getFileName()}" width="300px">
     <br>
-    <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
-    <p th:text="'Цена: ' + ${product.getPrice()}"></p>
-    <a th:href="@{/cart/add/{id}(id=${product.getId()})}">Добавить в корзину</a>
+    <a th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}" th:text="${manuscript.getTitle()}"></a>
+    <p th:text="'Цена: ' + ${manuscript.getPrice()}"></p>
+    <a th:href="@{/cart/add/{id}(id=${manuscript.getId()})}">Добавить в корзину</a>
     <hr>
 </div>
 </main>

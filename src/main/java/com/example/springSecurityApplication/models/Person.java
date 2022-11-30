@@ -2,10 +2,7 @@ package com.example.springSecurityApplication.models;
 
 
 import javax.persistence.*;
-import javax.print.attribute.standard.MediaSize;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -33,8 +30,8 @@ public class Person {
     private String role;
 
     @ManyToMany()
-    @JoinTable(name = "product_cart", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> product;
+    @JoinTable(name = "manuscript_cart", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "manuscript_id"))
+    private List<Manuscript> manuscript;
 
     @OneToMany(mappedBy = "person")
     private List<Order> orderList;

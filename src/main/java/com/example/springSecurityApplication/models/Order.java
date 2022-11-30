@@ -15,7 +15,7 @@ public class Order {
     private String number;
 
     @ManyToOne(optional = false)
-    private Product product;
+    private Manuscript manuscript;
 
     @ManyToOne(optional = false)
     private Person person;
@@ -41,12 +41,12 @@ public class Order {
         this.number = number;
     }
 
-    public Product getProduct() {
-        return product;
+    public Manuscript getManuscript() {
+        return manuscript;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setManuscript(Manuscript manuscript) {
+        this.manuscript = manuscript;
     }
 
     public Person getPerson() {
@@ -84,9 +84,9 @@ public class Order {
     public Order() {
     }
 
-    public Order(String number, Product product, Person person, int count, float price, Status status) {
+    public Order(String number, Manuscript manuscript, Person person, int count, float price, Status status) {
         this.number = number;
-        this.product = product;
+        this.manuscript = manuscript;
         this.person = person;
         this.count = count;
         this.price = price;

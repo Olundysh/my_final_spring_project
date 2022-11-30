@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/shared.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/product.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/manuscript.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -27,7 +27,7 @@
 </header>
 <main>
     <h3>Добавление товаров</h3>
-    <form th:method="POST" th:action="@{/admin/product/add}" th:object="${product}" enctype="multipart/form-data">
+    <form th:method="POST" th:action="@{/admin/manuscript/add}" th:object="${manuscript}" enctype="multipart/form-data">
         <label for="title">Введите наименование товара: </label>
         <input type="text" th:field="*{title}" placeholder="Наименование" id="title">
         <div style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>

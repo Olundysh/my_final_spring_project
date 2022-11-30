@@ -14,5 +14,5 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
     // Получаем корзину по id пользователя
     List<Cart> findByPersonId(int id);
 
-    void deleteCartByProductId(int id);
+    void deleteCartByManuscriptId(int id);
 }

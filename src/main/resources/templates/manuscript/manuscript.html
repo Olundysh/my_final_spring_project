@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/shared.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/product.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/manuscript.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,7 +26,7 @@
     </nav>
 </header>
 <main></main>
-<form th:method="POST" th:action="@{/product/search}">
+<form th:method="POST" th:action="@{/manuscript/search}">
     <fieldset>
         <legend>Выберите параметр для сортировка: </legend>
         <br>
@@ -62,21 +62,21 @@
     <br>
 </form>
 <h3>Результат</h3>
-<div th:each="product : ${search_product}">
-    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+<div th:each="manuscript : ${search_manuscript}">
+    <img th:src="'/img/' + ${manuscript.imageList[0].getFileName()}" width="300px">
     <br>
-    <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
-    <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+    <a th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}" th:text="${manuscript.getTitle()}"></a>
+    <p th:text="'Цена: ' + ${manuscript.getPrice()}"></p>
     <hr>
 </div>
 <hr>
 <h3>Доступные товары: </h3>
 <hr>
-<div th:each="product : ${products}">
-    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+<div th:each="manuscript : ${manuscripts}">
+    <img th:src="'/img/' + ${manuscript.imageList[0].getFileName()}" width="300px">
     <br>
-    <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
-    <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+    <a th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}" th:text="${manuscript.getTitle()}"></a>
+    <p th:text="'Цена: ' + ${manuscript.getPrice()}"></p>
     <hr>
 </div>
 </main>

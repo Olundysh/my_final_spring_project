@@ -3,7 +3,7 @@ package com.example.springSecurityApplication.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "product_cart")
+@Table(name = "manuscript_cart")
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,13 +12,13 @@ public class Cart {
     @Column(name = "person_id")
     private int personId;
 
-    @Column(name = "product_id")
-    private int productId;
+    @Column(name = "manuscript_id")
+    private int manuscriptId;
 
 
-    public Cart(int personId, int productId) {
+    public Cart(int personId, int manuscriptId) {
         this.personId = personId;
-        this.productId = productId;
+        this.manuscriptId = manuscriptId;
     }
 
     public Cart() {
@@ -40,12 +40,12 @@ public class Cart {
         this.personId = personId;
     }
 
-    public int getProductId() {
-        return productId;
+    public int getManuscriptId() {
+        return manuscriptId;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setManuscriptId(int manuscriptId) {
+        this.manuscriptId = manuscriptId;
     }
 }
 

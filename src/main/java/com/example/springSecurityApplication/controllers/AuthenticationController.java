@@ -54,9 +54,9 @@ public class AuthenticationController {
     }
 
     @Controller
-    public static class ProductController {
-        public String products() {
-            return "product/product";
+    public static class ManuscriptController {
+        public String manuscripts() {
+            return "manuscript/manuscript";
         }
     }
 }

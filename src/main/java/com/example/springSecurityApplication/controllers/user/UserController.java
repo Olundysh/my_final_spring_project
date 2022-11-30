@@ -2,12 +2,12 @@ package com.example.springSecurityApplication.controllers.user;
 
 import com.example.springSecurityApplication.enumm.Status;
 import com.example.springSecurityApplication.models.Cart;
+import com.example.springSecurityApplication.models.Manuscript;
 import com.example.springSecurityApplication.models.Order;
-import com.example.springSecurityApplication.models.Product;
 import com.example.springSecurityApplication.repositories.CartRepository;
 import com.example.springSecurityApplication.repositories.OrderRepository;
 import com.example.springSecurityApplication.security.PersonDetails;
-import com.example.springSecurityApplication.services.ProductService;
+import com.example.springSecurityApplication.services.ManuscriptService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -25,12 +25,12 @@ public class UserController {
     private final OrderRepository orderRepository;
     private final CartRepository cartRepository;
 
-    private final ProductService productService;
+    private final ManuscriptService manuscriptService;
 
-    public UserController(OrderRepository orderRepository, CartRepository cartRepository, ProductService productService) {
+    public UserController(OrderRepository orderRepository, CartRepository cartRepository, ManuscriptService manuscriptService) {
         this.orderRepository = orderRepository;
         this.cartRepository = cartRepository;
-        this.productService = productService;
+        this.manuscriptService = manuscriptService;
     }
 
     @GetMapping("/index")
@@ -45,17 +45,17 @@ public class UserController {
         {
             return "redirect:/admin";
         }
-        model.addAttribute("products", productService.getAllProduct());
+        model.addAttribute("manuscripts", manuscriptService.getAllManuscript());
         return "user/index";
     }
 
     @GetMapping("/cart/add/{id}")
-    public String addProductInCart(@PathVariable("id") int id, Model model){
-        Product product = productService.getProductId(id);
+    public String addManuscriptInCart(@PathVariable("id") int id, Model model){
+        Manuscript manuscript = manuscriptService.getManuscriptId(id);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
         int id_person = personDetails.getPerson().getId();
-        Cart cart = new Cart(id_person, product.getId());
+        Cart cart = new Cart(id_person, manuscript.getId());
         cartRepository.save(cart);
         return "redirect:/cart";
     }
@@ -66,26 +66,26 @@ public class UserController {
         PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
         int id_person = personDetails.getPerson().getId();
         List<Cart> cartList = cartRepository.findByPersonId(id_person);
-        List<Product> productsList = new ArrayList<>();
+        List<Manuscript> manuscriptsList = new ArrayList<>();
         for (Cart cart: cartList) {
-            productsList.add(productService.getProductId(cart.getProductId()));
+            manuscriptsList.add(manuscriptService.getManuscriptId(cart.getManuscriptId()));
         }
 
         float price = 0;
-        for (Product product: productsList) {
-            price += product.getPrice();
+        for (Manuscript manuscript : manuscriptsList) {
+            price += manuscript.getPrice();
         }
         model.addAttribute("price", price);
-        model.addAttribute("cart_product", productsList);
+        model.addAttribute("cart_manuscript", manuscriptsList);
         return "user/cart";
     }
 
     @GetMapping("/cart/delete/{id}")
-    public String deleteProductCart(Model model, @PathVariable("id") int id){
+    public String deleteManuscriptCart(Model model, @PathVariable("id") int id){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
         int id_person = personDetails.getPerson().getId();
-        cartRepository.deleteCartByProductId(id);
+        cartRepository.deleteCartByManuscriptId(id);
         return "redirect:/cart";
     }
 
@@ -95,22 +95,22 @@ public class UserController {
         PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
         int id_person = personDetails.getPerson().getId();
         List<Cart> cartList = cartRepository.findByPersonId(id_person);
-        List<Product> productsList = new ArrayList<>();
+        List<Manuscript> manuscriptsList = new ArrayList<>();
         // Получаем продукты из корзины по id
         for (Cart cart: cartList) {
-            productsList.add(productService.getProductId(cart.getProductId()));
+            manuscriptsList.add(manuscriptService.getManuscriptId(cart.getManuscriptId()));
         }
 
         float price = 0;
-        for (Product product: productsList){
-            price += product.getPrice();
+        for (Manuscript manuscript : manuscriptsList){
+            price += manuscript.getPrice();
         }
 
         String uuid = UUID.randomUUID().toString();
-        for (Product product: productsList){
-            Order newOrder = new Order(uuid, product, personDetails.getPerson(), 1, product.getPrice(), Status.Получен);
+        for (Manuscript manuscript : manuscriptsList){
+            Order newOrder = new Order(uuid, manuscript, personDetails.getPerson(), 1, manuscript.getPrice(), Status.Получен);
             orderRepository.save(newOrder);
-            cartRepository.deleteCartByProductId(product.getId());
+            cartRepository.deleteCartByManuscriptId(manuscript.getId());
         }
         return "redirect:/orders";
     }

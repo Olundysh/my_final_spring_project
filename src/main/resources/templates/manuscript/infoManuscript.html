@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/shared.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/product.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/manuscript.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,14 +26,14 @@
     </nav>
 </header>
 <h3>Товар</h3>
-<p th:text="'Наименование: ' + ${product.getTitle()}"></p>
-<p th:text="'Описание: ' + ${product.getDescription()}"></p>
-<p th:text="'Цена: ' + ${product.getPrice()}"></p>
-<p th:text="'Склад: ' + ${product.getWarehouse()}"></p>
-<p th:text="'Продавец: ' + ${product.getSeller()}"></p>
-<p th:text="'Категория: ' + ${product.getCategory().getName()}"></p>
+<p th:text="'Наименование: ' + ${manuscript.getTitle()}"></p>
+<p th:text="'Описание: ' + ${manuscript.getDescription()}"></p>
+<p th:text="'Цена: ' + ${manuscript.getPrice()}"></p>
+<p th:text="'Склад: ' + ${manuscript.getWarehouse()}"></p>
+<p th:text="'Продавец: ' + ${manuscript.getSeller()}"></p>
+<p th:text="'Категория: ' + ${manuscript.getCategory().getName()}"></p>
 
-<div th:each="img : ${product.getImageList()}">
+<div th:each="img : ${manuscript.getImageList()}">
     <img th:src="'/img/' + ${img.getFileName()}" width="300px">
 </div>
 <footer>

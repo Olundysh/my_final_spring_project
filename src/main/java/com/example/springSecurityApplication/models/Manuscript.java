@@ -3,13 +3,12 @@ package com.example.springSecurityApplication.models;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Product {
+public class Manuscript {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +34,7 @@ public class Product {
     @NotEmpty(message = "Информация о продавце не может быть пустым")
     private String seller;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "manuscript")
     private List<Image> imageList = new ArrayList<>();
     private LocalDateTime dateTime;
 
@@ -49,15 +48,15 @@ public class Product {
     }
 
     @ManyToMany()
-    @JoinTable(name = "product_cart", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "person_id"))
+    @JoinTable(name = "manuscript_cart", joinColumns = @JoinColumn(name = "manuscript_id"), inverseJoinColumns = @JoinColumn(name = "person_id"))
     private List<Person> personList;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "manuscript")
     private List<Order> orderList;
 
     // Метод по добавлению фотографий в лист к текущему продукту
-    public void addImageToProduct(Image image){
-        image.setProduct(this);
+    public void addImageToManuscript(Image image){
+        image.setManuscript(this);
         imageList.add(image);
     }
 

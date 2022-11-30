@@ -1,9 +1,9 @@
 package com.example.springSecurityApplication.controllers.admin;
 
 import com.example.springSecurityApplication.models.Image;
-import com.example.springSecurityApplication.models.Product;
+import com.example.springSecurityApplication.models.Manuscript;
 import com.example.springSecurityApplication.repositories.CategoryRepository;
-import com.example.springSecurityApplication.services.ProductService;
+import com.example.springSecurityApplication.services.ManuscriptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -25,38 +25,38 @@ public class AdminController {
     @Value("${upload.path}")
     private String uploadPath;
 
-    private final ProductService productService;
+    private final ManuscriptService manuscriptService;
 
     private final CategoryRepository categoryRepository;
 
     @Autowired
-    public AdminController(ProductService productService, CategoryRepository categoryRepository) {
-        this.productService = productService;
+    public AdminController(ManuscriptService manuscriptService, CategoryRepository categoryRepository) {
+        this.manuscriptService = manuscriptService;
         this.categoryRepository = categoryRepository;
     }
 
     //    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("")
     public String admin(Model model){
-        model.addAttribute("products", productService.getAllProduct());
+        model.addAttribute("manuscripts", manuscriptService.getAllManuscript());
         return "admin/admin";
     }
 
-    // http:8080/localhost/admin/product/add
+    // http:8080/localhost/admin/manuscript/add
     // Метод по отображению страницы с возможностью добавления товаров
-    @GetMapping("/product/add")
-    public String addProduct(Model model){
-        model.addAttribute("product", new Product());
+    @GetMapping("/manuscript/add")
+    public String addManuscript(Model model){
+        model.addAttribute("manuscript", new Manuscript());
         model.addAttribute("category", categoryRepository.findAll());
-        return "product/addProduct";
+        return "addManuscript";
     }
 
     // Метод по добавлению продукта в БД через сервис->репозиторий
-    @PostMapping("/product/add")
-    public String addProduct(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult, @RequestParam("file_one")MultipartFile file_one, @RequestParam("file_two")MultipartFile file_two, @RequestParam("file_three")MultipartFile file_three, @RequestParam("file_four")MultipartFile file_four, @RequestParam("file_five") MultipartFile file_five) throws IOException {
+    @PostMapping("/manuscript/add")
+    public String addManuscript(@ModelAttribute("manuscript") @Valid Manuscript manuscript, BindingResult bindingResult, @RequestParam("file_one")MultipartFile file_one, @RequestParam("file_two")MultipartFile file_two, @RequestParam("file_three")MultipartFile file_three, @RequestParam("file_four")MultipartFile file_four, @RequestParam("file_five") MultipartFile file_five) throws IOException {
         if(bindingResult.hasErrors())
         {
-            return "product/addProduct";
+            return "addManuscript";
         }
 
         if(file_one != null)
@@ -69,9 +69,9 @@ public class AdminController {
             String resultFileName = uuidFile + "." + file_one.getOriginalFilename();
             file_one.transferTo(new File(uploadPath + "/" + resultFileName));
             Image image = new Image();
-            image.setProduct(product);
+            image.setManuscript(manuscript);
             image.setFileName(resultFileName);
-            product.addImageToProduct(image);
+            manuscript.addImageToManuscript(image);
         }
 
         if(file_two != null)
@@ -84,9 +84,9 @@ public class AdminController {
             String resultFileName = uuidFile + "." + file_two.getOriginalFilename();
             file_two.transferTo(new File(uploadPath + "/" + resultFileName));
             Image image = new Image();
-            image.setProduct(product);
+            image.setManuscript(manuscript);
             image.setFileName(resultFileName);
-            product.addImageToProduct(image);
+            manuscript.addImageToManuscript(image);
         }
 
         if(file_three != null)
@@ -99,9 +99,9 @@ public class AdminController {
             String resultFileName = uuidFile + "." + file_three.getOriginalFilename();
             file_three.transferTo(new File(uploadPath + "/" + resultFileName));
             Image image = new Image();
-            image.setProduct(product);
+            image.setManuscript(manuscript);
             image.setFileName(resultFileName);
-            product.addImageToProduct(image);
+            manuscript.addImageToManuscript(image);
         }
 
         if(file_four != null)
@@ -114,9 +114,9 @@ public class AdminController {
             String resultFileName = uuidFile + "." + file_four.getOriginalFilename();
             file_four.transferTo(new File(uploadPath + "/" + resultFileName));
             Image image = new Image();
-            image.setProduct(product);
+            image.setManuscript(manuscript);
             image.setFileName(resultFileName);
-            product.addImageToProduct(image);
+            manuscript.addImageToManuscript(image);
         }
 
         if(file_five != null)
@@ -129,37 +129,37 @@ public class AdminController {
             String resultFileName = uuidFile + "." + file_five.getOriginalFilename();
             file_five.transferTo(new File(uploadPath + "/" + resultFileName));
             Image image = new Image();
-            image.setProduct(product);
+            image.setManuscript(manuscript);
             image.setFileName(resultFileName);
-            product.addImageToProduct(image);
+            manuscript.addImageToManuscript(image);
         }
 
-        productService.saveProduct(product);
+        manuscriptService.saveManuscript(manuscript);
         return "redirect:/admin";
     }
 
-    @GetMapping("/product/delete/{id}")
-    public String deleteProduct(@PathVariable("id") int id){
-        productService.deleteProduct(id);
+    @GetMapping("/manuscript/delete/{id}")
+    public String deleteManuscript(@PathVariable("id") int id){
+        manuscriptService.deleteManuscript(id);
         return "redirect:/admin";
     }
 
     // Метод по отображению страницы с возможностью редактирования товаров
-    @GetMapping("/product/edit/{id}")
-    public String editProduct(Model model, @PathVariable("id") int id){
-        model.addAttribute("product", productService.getProductId(id));
+    @GetMapping("/manuscript/edit/{id}")
+    public String editManuscript(Model model, @PathVariable("id") int id){
+        model.addAttribute("manuscript", manuscriptService.getManuscriptId(id));
         model.addAttribute("category", categoryRepository.findAll());
-        return "product/editProduct";
+        return "editManuscript";
     }
 
     // Метод по редактированию товара
-    @PostMapping("/product/edit/{id}")
-    public String editProduct(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult, @PathVariable("id") int id){
+    @PostMapping("/manuscript/edit/{id}")
+    public String editManuscript(@ModelAttribute("manuscript") @Valid Manuscript manuscript, BindingResult bindingResult, @PathVariable("id") int id){
         if(bindingResult.hasErrors())
         {
-            return "product/editProduct";
+            return "editManuscript";
         }
-        productService.updateProduct(id, product);
+        manuscriptService.updateManuscript(id, manuscript);
         return "redirect:/admin";
     }
 

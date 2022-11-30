@@ -11,12 +11,12 @@ public class Image {
     private String fileName;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    private Product product;
+    private Manuscript manuscript;
 
-    public Image(int id, String fileName, Product product) {
+    public Image(int id, String fileName, Manuscript manuscript) {
         this.id = id;
         this.fileName = fileName;
-        this.product = product;
+        this.manuscript = manuscript;
     }
 
     public Image() {
@@ -38,11 +38,11 @@ public class Image {
         this.fileName = fileName;
     }
 
-    public Product getProduct() {
-        return product;
+    public Manuscript getManuscript() {
+        return manuscript;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setManuscript(Manuscript manuscript) {
+        this.manuscript = manuscript;
     }
 }
