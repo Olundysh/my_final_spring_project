@@ -44,12 +44,12 @@
         <div th:each="manuscript : ${manuscripts}">
             <img th:src="'/img/' + ${manuscript.imageList[0].getFileName()}" width="300px">
             <br>
-            <a th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}" th:text="${manuscript.getTitle()}"></a>
+            <a class="manuscript_description" th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}" th:text="${manuscript.getTitle()}"></a>
             <br>
             <br>
-            <p th:text="'Dating: ' + ${manuscript.getDating()} + 'th century'"></p>
+            <p class="manuscript_description" th:text="'Dating: ' + ${manuscript.getDating()} + 'th century'"></p>
             <br>
-            <a th:href="@{/favourites/add/{id}(id=${manuscript.getId()})}">Select to the Favourites</a>
+            <a class="manuscript_description" th:href="@{/favourites/add/{id}(id=${manuscript.getId()})}">Select to the Favourites</a>
         </div>
     </div>
 
@@ -63,7 +63,7 @@
                 <input name="search" id="search" placeholder="Enter a title">
                 <br>
                 <p>Searching by dating</p>
-                <label for="ot">Up</label>
+                <label for="ot">From</label>
                 <input type="text" name="ot" id="ot" placeholder="5th century">
                 <label for="do">To</label>
                 <input type="text" name="do" id="do" placeholder="8th century">
@@ -94,7 +94,7 @@
 </main>
 <footer>
     <form method="get" th:action="@{/selection}">
-        <input type="submit" class=nav_item value="Selection history">
+        <input type="submit" class=nav_item value="My library">
     </form>
     <p>
         śanmausa ñäkcyeṃ yetweṃtsa yaitu vājr eṃṅku ṣarnene • ylaiñäktñe weṣsa karpāsta wrocce telkine

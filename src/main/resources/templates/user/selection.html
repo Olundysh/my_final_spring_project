@@ -5,7 +5,7 @@
   <title>Заказы</title>
 </head>
 <body>
-<h3>Заказы</h3>
+<h3>My library</h3>
 <div th:each="selection : ${selection}">
   <h3 th:text="'Заказ № ' + ${selection.getNumber()}"></h3>
   <img th:src="'/img/' + ${selection.getManuscript().imageList[0].getFileName()}" width="300px">

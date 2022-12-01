@@ -52,10 +52,12 @@ button::-moz-focus-inner {
 
 a, a:visited {
     text-decoration: none;
+    color: #9da5ee;
 }
 
 a:hover {
     text-decoration: none;
+    color: darkgreen;
 }
 
 ul li {
@@ -66,9 +68,13 @@ img {
     vertical-align: top;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-size: inherit;
-    font-weight: 400;
+h3 {
+    font-size: x-large;
+    font-weight: 800;
+    display: block;
+    padding: 0 0 20px 0;
+    justify-self: center;
+    color: #6369a1;
 }
 
 body {
@@ -79,6 +85,7 @@ body {
     monospace;
 
 }
+
 
 header{
     display: grid;
@@ -186,6 +193,14 @@ main{
 
 .banner_btn:active{
     background-color: white;
+    color: #4551bb;
+}
+
+.manuscript_description{
+    display: block;
+    padding: 5px;
+    font-size: large;
+    font-weight: bold;
     color: #4551bb;
 }
 
