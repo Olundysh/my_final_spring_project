@@ -53,7 +53,9 @@ public class AdminController {
 
     // Метод по добавлению продукта в БД через сервис->репозиторий
     @PostMapping("/manuscript/add")
-    public String addManuscript(@ModelAttribute("manuscript") @Valid Manuscript manuscript, BindingResult bindingResult, @RequestParam("file_one")MultipartFile file_one, @RequestParam("file_two")MultipartFile file_two, @RequestParam("file_three")MultipartFile file_three, @RequestParam("file_four")MultipartFile file_four, @RequestParam("file_five") MultipartFile file_five) throws IOException {
+    public String addManuscript(@ModelAttribute("manuscript") @Valid Manuscript manuscript, BindingResult bindingResult, @RequestParam("file_one")MultipartFile file_one
+//                                @RequestParam("file_two")MultipartFile file_two, @RequestParam("file_three")MultipartFile file_three, @RequestParam("file_four")MultipartFile file_four, @RequestParam("file_five") MultipartFile file_five
+    ) throws IOException {
         if(bindingResult.hasErrors())
         {
             return "manuscript/addManuscript";
@@ -74,69 +76,69 @@ public class AdminController {
             manuscript.addImageToManuscript(image);
         }
 
-        if(file_two != null)
-        {
-            File uploadDir = new File(uploadPath);
-            if(!uploadDir.exists()){
-                uploadDir.mkdir();
-            }
-            String uuidFile = UUID.randomUUID().toString();
-            String resultFileName = uuidFile + "." + file_two.getOriginalFilename();
-            file_two.transferTo(new File(uploadPath + "/" + resultFileName));
-            Image image = new Image();
-            image.setManuscript(manuscript);
-            image.setFileName(resultFileName);
-            manuscript.addImageToManuscript(image);
-        }
-
-        if(file_three != null)
-        {
-            File uploadDir = new File(uploadPath);
-            if(!uploadDir.exists()){
-                uploadDir.mkdir();
-            }
-            String uuidFile = UUID.randomUUID().toString();
-            String resultFileName = uuidFile + "." + file_three.getOriginalFilename();
-            file_three.transferTo(new File(uploadPath + "/" + resultFileName));
-            Image image = new Image();
-            image.setManuscript(manuscript);
-            image.setFileName(resultFileName);
-            manuscript.addImageToManuscript(image);
-        }
-
-        if(file_four != null)
-        {
-            File uploadDir = new File(uploadPath);
-            if(!uploadDir.exists()){
-                uploadDir.mkdir();
-            }
-            String uuidFile = UUID.randomUUID().toString();
-            String resultFileName = uuidFile + "." + file_four.getOriginalFilename();
-            file_four.transferTo(new File(uploadPath + "/" + resultFileName));
-            Image image = new Image();
-            image.setManuscript(manuscript);
-            image.setFileName(resultFileName);
-            manuscript.addImageToManuscript(image);
-        }
-
-        if(file_five != null)
-        {
-            File uploadDir = new File(uploadPath);
-            if(!uploadDir.exists()){
-                uploadDir.mkdir();
-            }
-            String uuidFile = UUID.randomUUID().toString();
-            String resultFileName = uuidFile + "." + file_five.getOriginalFilename();
-            file_five.transferTo(new File(uploadPath + "/" + resultFileName));
-            Image image = new Image();
-            image.setManuscript(manuscript);
-            image.setFileName(resultFileName);
-            manuscript.addImageToManuscript(image);
-        }
-
+//        if(file_two != null)
+//        {
+//            File uploadDir = new File(uploadPath);
+//            if(!uploadDir.exists()){
+//                uploadDir.mkdir();
+//            }
+//            String uuidFile = UUID.randomUUID().toString();
+//            String resultFileName = uuidFile + "." + file_two.getOriginalFilename();
+//            file_two.transferTo(new File(uploadPath + "/" + resultFileName));
+//            Image image = new Image();
+//            image.setManuscript(manuscript);
+//            image.setFileName(resultFileName);
+//            manuscript.addImageToManuscript(image);
+//        }
+//
+//        if(file_three != null)
+//        {
+//            File uploadDir = new File(uploadPath);
+//            if(!uploadDir.exists()){
+//                uploadDir.mkdir();
+//            }
+//            String uuidFile = UUID.randomUUID().toString();
+//            String resultFileName = uuidFile + "." + file_three.getOriginalFilename();
+//            file_three.transferTo(new File(uploadPath + "/" + resultFileName));
+//            Image image = new Image();
+//            image.setManuscript(manuscript);
+//            image.setFileName(resultFileName);
+//            manuscript.addImageToManuscript(image);
+//        }
+//
+//        if(file_four != null)
+//        {
+//            File uploadDir = new File(uploadPath);
+//            if(!uploadDir.exists()){
+//                uploadDir.mkdir();
+//            }
+//            String uuidFile = UUID.randomUUID().toString();
+//            String resultFileName = uuidFile + "." + file_four.getOriginalFilename();
+//            file_four.transferTo(new File(uploadPath + "/" + resultFileName));
+//            Image image = new Image();
+//            image.setManuscript(manuscript);
+//            image.setFileName(resultFileName);
+//            manuscript.addImageToManuscript(image);
+//        }
+//
+//        if(file_five != null)
+//        {
+//            File uploadDir = new File(uploadPath);
+//            if(!uploadDir.exists()){
+//                uploadDir.mkdir();
+//            }
+//            String uuidFile = UUID.randomUUID().toString();
+//            String resultFileName = uuidFile + "." + file_five.getOriginalFilename();
+//            file_five.transferTo(new File(uploadPath + "/" + resultFileName));
+//            Image image = new Image();
+//            image.setManuscript(manuscript);
+//            image.setFileName(resultFileName);
+//            manuscript.addImageToManuscript(image);
+//        }
+//
         manuscriptService.saveManuscript(manuscript);
         return "redirect:/admin";
-    }
+   }
 
     @GetMapping("/manuscript/delete/{id}")
     public String deleteManuscript(@PathVariable("id") int id){

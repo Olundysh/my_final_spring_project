@@ -1,0 +1,44 @@
+.manuscript_section {
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    justify-self: center;
+    height: 400px;
+    margin-bottom: 40px;
+    color: #4551bb;
+    font-size: large;
+    font-weight: bold;
+    line-height: 10px;
+}
+
+.selection_section {
+    display: grid;
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 2;
+    justify-self: end;
+    align-content: center;
+    width: fit-content;
+    padding: 20px 100px 0 0;
+    color: #4551bb;
+    font-size: large;
+    font-weight: bold;
+    line-height: 5px;
+}
+
+#search, #ot, #do {
+    width: fit-content;
+    padding: 5px;
+
+}
+
+.manuscript_search {
+    display: grid;
+    row-gap: 20px;
+}
+
+.banner_btn{
+    margin: 20px auto auto auto;
+}

@@ -13,6 +13,19 @@
   <title>Главная страница</title>
 </head>
 <body>
+<header>
+  <form method="get" th:action="@{/index}">
+    <input type="submit" class=nav_item value="TOCHMAC">
+  </form>
+  <nav>
+    <form method="get" th:action="@{/favourites}">
+      <input type="submit" class=nav_item value="Favourites">
+    </form>
+    <form method="post" th:action="@{/logout}">
+      <input type="submit" class=nav_item value="Log out from my profile">
+    </form>
+  </nav>
+</header>
 <main>
 <h3>Корзина товаров</h3>
 <div th:each="manuscript : ${favourites_manuscript}">
@@ -26,5 +39,13 @@
 <!--<h3 th:text="'Итого рукописей: ' + ${favourites_manuscript.getCount()}"></h3>-->
 <a href="/selection/create">Оформить заказ</a>
 </main>
+<footer>
+  <div class="footerLogo">TOCHMAC</div>
+  <p>
+    śanmausa ñäkcyeṃ yetweṃtsa yaitu vājr eṃṅku ṣarnene • ylaiñäktñe weṣsa karpāsta wrocce telkine
+    <br/>
+    wismai klyautkasta brāhmaññai wertsyai po śaiṣṣe • yāṯaṣṣeñcai ilaiñakteṃ po ylaiñäktents āṣtsa pralyu yparwe
+  </p>
+</footer>
 </body>
 </html>

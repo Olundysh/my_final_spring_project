@@ -15,13 +15,15 @@
 </head>
 <body>
 <header>
-    <h1 class="logo">TOCHMAC</h1>
+    <form method="get" th:action="@{/index}">
+        <input type="submit" class=nav_item value="TOCHMAC">
+    </form>
     <nav>
-        <button class="nav_item" href="#">
-            FAVOURITIES
-        </button>
+        <form method="get" th:action="@{/favourites}">
+            <input type="submit" class=nav_item value="Favourites">
+        </form>
         <form method="post" th:action="@{/logout}">
-            <input type="submit" class=nav_item value="Выйти из личного кабинета">
+            <input type="submit" class=nav_item value="Log out from my profile">
         </form>
     </nav>
 </header>

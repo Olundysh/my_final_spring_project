@@ -1,74 +1,76 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-  <link rel="stylesheet" type="text/css" th:href="@{/css/shared.css}">
-  <link rel="stylesheet" type="text/css" th:href="@{/css/manuscript.css}">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-          href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;700&display=swap"
-          rel="stylesheet"
-  />
-  <title>Редактирование товаров</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/shared.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/manuscript.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;700&display=swap"
+            rel="stylesheet"
+    />
+    <title>Редактирование товаров</title>
 </head>
 <body>
 <header>
-  <h1 class="logo">TOCHMAC</h1>
-  <nav>
-    <button class="nav_item" href="#">
-      FAVOURITIES
-    </button>
-    <form method="post" th:action="@{/logout}">
-      <input type="submit" class=nav_item value="Выйти из личного кабинета">
+
+    <form method="get" th:action="@{/index}">
+        <input type="submit" class=nav_item value="TOCHMAC">
     </form>
-  </nav>
+
+    <form method="post" th:action="@{/logout}">
+        <input type="submit" class=nav_item value="Log out from my profile">
+    </form>
+
 </header>
 <main>
-  <h3>Редактирование товаров</h3>
-  <form th:method="POST" th:action="@{/admin/manuscript/edit/{id}(id=${manuscript.getId()})}" th:object="${manuscript}">
-    <label for="title">Введите наименование товара: </label>
-    <input type="text" th:field="*{title}" placeholder="Наименование" id="title">
-    <div style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
-    <br>
-    <br>
-    <label for="description">Введите описание товара: </label>
-    <textarea th:field="*{description}" placeholder="Описание" id="description"></textarea>
-    <div style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
-    <br>
-    <br>
-    <label for="dating">Введите цену товара: </label>
-    <input type="number" th:field="*{dating}" min="1" step="0.00" id="dating">
-    <div style="color: red" th:if="${#fields.hasErrors('dating')}" th:errors="*{dating}"></div>
-    <br>
-    <br>
-    <label for="collection">Введите склад: </label>
-    <input type="text" th:field="*{collection}" placeholder="Склад" id="collection">
-    <div style="color: red" th:if="${#fields.hasErrors('collection')}" th:errors="*{collection}"></div>
-    <br>
-    <br>
-    <label for="publications">Введите данные о продавце: </label>
-    <textarea th:field="*{publications}" placeholder="Продавец" id="publications"></textarea>
-    <div style="color: red" th:if="${#fields.hasErrors('publications')}" th:errors="*{publications}"></div>
-    <br>
-    <br>
-    <label for="category">Введите категорию товара: </label>
-    <select name="category" th:field="*{category}" id="category">
-      <div th:each="element : ${category}">
-        <option th:text="${element.getName()}" th:value="${element.getId()}"></option>
-      </div>
-    </select>
-    <input type="submit" value="Редактировать">
-  </form>
+    <h3>Редактирование товаров</h3>
+    <form th:method="POST" th:action="@{/admin/manuscript/edit/{id}(id=${manuscript.getId()})}"
+          th:object="${manuscript}">
+        <label for="title">Введите наименование товара: </label>
+        <input type="text" th:field="*{title}" placeholder="Наименование" id="title">
+        <div style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+        <br>
+        <br>
+        <label for="description">Введите описание товара: </label>
+        <textarea th:field="*{description}" placeholder="Описание" id="description"></textarea>
+        <div style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+        <br>
+        <br>
+        <label for="dating">Введите цену товара: </label>
+        <input type="number" th:field="*{dating}" min="1" step="0.00" id="dating">
+        <div style="color: red" th:if="${#fields.hasErrors('dating')}" th:errors="*{dating}"></div>
+        <br>
+        <br>
+        <label for="collection">Введите склад: </label>
+        <input type="text" th:field="*{collection}" placeholder="Склад" id="collection">
+        <div style="color: red" th:if="${#fields.hasErrors('collection')}" th:errors="*{collection}"></div>
+        <br>
+        <br>
+        <label for="publications">Введите данные о продавце: </label>
+        <textarea th:field="*{publications}" placeholder="Продавец" id="publications"></textarea>
+        <div style="color: red" th:if="${#fields.hasErrors('publications')}" th:errors="*{publications}"></div>
+        <br>
+        <br>
+        <label for="category">Введите категорию товара: </label>
+        <select name="category" th:field="*{category}" id="category">
+            <div th:each="element : ${category}">
+                <option th:text="${element.getName()}" th:value="${element.getId()}"></option>
+            </div>
+        </select>
+        <input type="submit" value="Редактировать">
+    </form>
 </main>
 <footer>
-  <div class="footerLogo">TOCHMAC</div>
-  <p>
-    śanmausa ñäkcyeṃ yetweṃtsa yaitu vājr eṃṅku ṣarnene • ylaiñäktñe weṣsa karpāsta wrocce telkine
-    <br />
-    wismai klyautkasta brāhmaññai wertsyai po śaiṣṣe • yāṯaṣṣeñcai ilaiñakteṃ po ylaiñäktents āṣtsa pralyu yparwe
-  </p>
+    <div class="footerLogo">TOCHMAC</div>
+    <p>
+        śanmausa ñäkcyeṃ yetweṃtsa yaitu vājr eṃṅku ṣarnene • ylaiñäktñe weṣsa karpāsta wrocce telkine
+        <br/>
+        wismai klyautkasta brāhmaññai wertsyai po śaiṣṣe • yāṯaṣṣeñcai ilaiñakteṃ po ylaiñäktents āṣtsa pralyu yparwe
+    </p>
 </footer>
 </body>
 </html>
