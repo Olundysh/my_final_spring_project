@@ -11,7 +11,7 @@
             href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;700&display=swap"
             rel="stylesheet"
     />
-    <title>Информация о товаре</title>
+    <title>Manuscript info</title>
 </head>
 <body>
 <header>
@@ -28,12 +28,12 @@
     </nav>
 </header>
 <h3>Товар</h3>
-<p th:text="'Наименование: ' + ${manuscript.getTitle()}"></p>
-<p th:text="'Описание: ' + ${manuscript.getDescription()}"></p>
-<p th:text="'Датировка: ' + ${manuscript.getDating()}"></p>
-<p th:text="'Склад: ' + ${manuscript.getCollection()}"></p>
-<p th:text="'Продавец: ' + ${manuscript.getPublications()}"></p>
-<p th:text="'Категория: ' + ${manuscript.getCategory().getName()}"></p>
+<p th:text="'Shelf Number: ' + ${manuscript.getTitle()}"></p>
+<p th:text="'Description: ' + ${manuscript.getDescription()}"></p>
+<p th:text="'Dating: ' + ${manuscript.getDating()}"></p>
+<p th:text="'Collection: ' + ${manuscript.getCollection()}"></p>
+<p th:text="'Publications: ' + ${manuscript.getPublications()}"></p>
+<p th:text="'Category: ' + ${manuscript.getCategory().getName()}"></p>
 
 <div th:each="img : ${manuscript.getImageList()}">
     <img th:src="'/img/' + ${img.getFileName()}" width="300px">

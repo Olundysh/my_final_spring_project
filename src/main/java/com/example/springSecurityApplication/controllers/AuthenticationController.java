@@ -30,11 +30,6 @@ public class AuthenticationController {
         return "authentication/login";
     }
 
-//    @GetMapping("/registration")
-//    public String registration(Model model){
-//        model.addAttribute("person", new Person());
-//
-//    }
 
     @GetMapping("/registration")
     public String registration(@ModelAttribute("person") Person person){
@@ -45,7 +40,7 @@ public class AuthenticationController {
     @PostMapping("/registration")
     public String resultRegistration(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult){
         System.out.println("Метод сохранения");
-        personValidator.validate(person, bindingResult); // Если валидатор возвращает ошибку помещаем данную ошибку в bindingResult
+        personValidator.validate(person, bindingResult); // Если валидатор возвращает ошибку, помещаем данную ошибку в bindingResult:
         if(bindingResult.hasErrors()){
             return "authentication/registration";
         }
@@ -55,10 +50,9 @@ public class AuthenticationController {
 
     @Controller
     public static class ManuscriptController {
-        public String manuscripts() {
+        public String manuscript() {
             return "manuscript/manuscript";
         }
     }
 }
-//http:localhost:8080/authentication/login
 

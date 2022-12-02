@@ -1,51 +1,54 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link
-          href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;700&display=swap"
-          rel="stylesheet"
-  />
-  <link rel="stylesheet" type="text/css" th:href="@{/css/shared.css}">
-  <link rel="stylesheet" type="text/css" th:href="@{/css/favourites.css}">
-  <title>Главная страница</title>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;700&display=swap"
+            rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/shared.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/favourites.css}">
+    <title>Главная страница</title>
 </head>
 <body>
 <header>
-  <form method="get" th:action="@{/index}">
-    <input type="submit" class=nav_item value="TOCHMAC">
-  </form>
-  <nav>
-    <form method="get" th:action="@{/favourites}">
-      <input type="submit" class=nav_item value="Favourites">
+    <form method="get" th:action="@{/index}">
+        <input type="submit" class=nav_item value="TOCHMAC">
     </form>
-    <form method="post" th:action="@{/logout}">
-      <input type="submit" class=nav_item value="Log out from my profile">
-    </form>
-  </nav>
+    <nav>
+        <form method="get" th:action="@{/favourites}">
+            <input type="submit" class=nav_item value="Favourites">
+        </form>
+        <form method="post" th:action="@{/logout}">
+            <input type="submit" class=nav_item value="Log out from my profile">
+        </form>
+    </nav>
 </header>
-<main>
-<h3>Корзина товаров</h3>
-<div th:each="manuscript : ${favourites_manuscript}">
-  <img th:src="'/img/' + ${manuscript.imageList[0].getFileName()}" width="300px">
-  <br>
-  <a th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}" th:text="${manuscript.getTitle()}"></a>
-  <p th:text="'Цена: ' + ${manuscript.getDating()}"></p>
-  <a th:href="@{/favourites/delete/{id}(id=${manuscript.getId()})}">Удалить</a>
-  <hr>
-</div>
-<!--<h3 th:text="'Итого рукописей: ' + ${favourites_manuscript.getCount()}"></h3>-->
-<a href="/selection/create">Оформить заказ</a>
+<main >
+    <div class="favourites_section" th:each="manuscript : ${favourites_manuscript}">
+        <img th:src="'/img/' + ${manuscript.imageList[0].getFileName()}" width="300px">
+        <br>
+        <a class="manuscript_description" th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}"
+           th:text="${manuscript.getTitle()}"></a>
+        <p class="manuscript_description" th:text="'Dating: ' + ${manuscript.getDating()} + 'th century'"></p>
+        <a class="manuscript_description" th:href="@{/favourites/delete/{id}(id=${manuscript.getId()})}">Remove from
+            Favourites</a>
+    </div>
+    <div class="favourites_button">
+        <a class="banner_btn" href="/selection/create">Send to my Library</a>
+    </div>
 </main>
 <footer>
-  <div class="footerLogo">TOCHMAC</div>
-  <p>
-    śanmausa ñäkcyeṃ yetweṃtsa yaitu vājr eṃṅku ṣarnene • ylaiñäktñe weṣsa karpāsta wrocce telkine
-    <br/>
-    wismai klyautkasta brāhmaññai wertsyai po śaiṣṣe • yāṯaṣṣeñcai ilaiñakteṃ po ylaiñäktents āṣtsa pralyu yparwe
-  </p>
+    <form method="get" th:action="@{/selection}">
+        <input type="submit" class=nav_item value="My library">
+    </form>
+    <p>
+        śanmausa ñäkcyeṃ yetweṃtsa yaitu vājr eṃṅku ṣarnene • ylaiñäktñe weṣsa karpāsta wrocce telkine
+        <br/>
+        wismai klyautkasta brāhmaññai wertsyai po śaiṣṣe • yāṯaṣṣeñcai ilaiñakteṃ po ylaiñäktents āṣtsa pralyu yparwe
+    </p>
 </footer>
 </body>
 </html>

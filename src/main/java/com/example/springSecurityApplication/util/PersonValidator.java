@@ -27,7 +27,7 @@ public class PersonValidator implements Validator {
     public void validate(Object target, Errors errors) {
         Person person = (Person) target;
         if (personService.findByLogin(person) != null) {
-            errors.rejectValue("login", "", "Данный логин уже занят");
+            errors.rejectValue("login", "", "This login is already in use");
         }
     }
 }

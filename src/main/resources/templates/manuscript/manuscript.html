@@ -5,8 +5,8 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/shared.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/manuscript.css}">
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
             href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;700&display=swap"
             rel="stylesheet"
@@ -27,66 +27,58 @@
         </form>
     </nav>
 </header>
-<main></main>
-<form th:method="POST" th:action="@{/manuscript/search}">
-    <fieldset>
-        <legend>Выберите параметр для сортировка: </legend>
-        <br>
-        <label for="search">Поиск по наименованию</label>
-        <input name="search" id="search" th:value="*{value_search}">
-        <br>
-        <p>Цена, ₽</p>
-        <label for="ot">От</label>
-        <input type="text" name="ot" id="ot" th:value="*{value_dating_ot}">
-        <label for="do">До</label>
-        <input type="text" name="do" id="do" th:value="*{value_dating_do}">
-        <br>
-        <br>
-        <div>
-            <label for="ascending_dating">Отсортировать по возрастанию цены</label>
-            <input type="radio" id="ascending_dating" name="dating" value="sorted_by_ascending_dating">
+<main>
+    <div class="result_selection_section">
+        <form th:method="POST" th:action="@{/manuscript/search}">
+            <fieldset class="manuscript_search">
+                <legend>SELECT SORTING OPTIONS:</legend>
+                <br>
+                <label for="search">Searching by name</label>
+                <input name="search" id="search" placeholder="Enter a title">
+                <br>
+                <p>Searching by dating</p>
+                <label for="ot">From</label>
+                <input type="text" name="ot" id="ot" placeholder="5th century">
+                <label for="do">To</label>
+                <input type="text" name="do" id="do" placeholder="8th century">
+                <div>
+                    <label for="ascending_dating">From old to new</label>
+                    <input type="radio" id="ascending_dating" name="dating" value="sorted_by_ascending_dating">
+                    <br>
+                    <label for="descending_dating">From new to old</label>
+                    <input type="radio" id="descending_dating" name="dating" value="sorted_by_descending_dating">
+                    <br>
+                    <label for="udanavarga">Udānavarga </label>
+                    <input type="radio" id="udanavarga" name="contact" value="udanavarga">
+                    <label for="udanalankara">Udānālaṅkara </label>
+                    <input type="radio" id="udanalankara" name="contact" value="udanalankara">
+                    <label for="udanastotra">Udānastotra </label>
+                    <input type="radio" id="udanastotra" name="contact" value="udanastotra">
+                    <br>
+                    <input type="submit" value="Search" class="banner_btn">
+                </div>
+            </fieldset>
             <br>
-            <br>
-            <label for="descending_dating">Отсортировать по убыванию цены</label>
-            <input type="radio" id="descending_dating" name="dating" value="sorted_by_descending_dating">
-            <p>Категория товаров: </p>
-            <label for="furniture">Мебель</label>
-            <input type="radio" id="furniture" name="contact" value="furniture">
-            <label for="appliances">Бытовая техника</label>
-            <input type="radio" id="appliances" name="contact" value="appliances">
-            <label for="clothes">Одежда</label>
-            <input type="radio" id="clothes" name="contact" value="clothes">
-            <br>
-            <br>
-            <input type="submit" value="Найти">
+        </form>
+    </div>
+    <div class="result_section">
+        <h3 class="result_header">Search result</h3>
+        <div  th:each="manuscript : ${search_manuscript}">
+            <div>
+                <img th:src="'/img/' + ${manuscript.imageList[0].getFileName()}" width="300px">
+                <br>
+                <a th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}" th:text="${manuscript.getTitle()}"></a>
+                <br>
+                <p class="manuscript_description" th:text="'Dating: ' + ${manuscript.getDating()} + 'th century'"></p>
+            </div>
         </div>
-    </fieldset>
-    <br>
-</form>
-<h3>Результат</h3>
-<div th:each="manuscript : ${search_manuscript}">
-    <img th:src="'/img/' + ${manuscript.imageList[0].getFileName()}" width="300px">
-    <br>
-    <a th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}" th:text="${manuscript.getTitle()}"></a>
-    <p th:text="'Датировка: ' + ${manuscript.getDating()}"></p>
-    <hr>
-</div>
-<hr>
-<h3>Доступные товары: </h3>
-<hr>
-<div th:each="manuscript : ${manuscripts}">
-    <img th:src="'/img/' + ${manuscript.imageList[0].getFileName()}" width="300px">
-    <br>
-    <a th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}" th:text="${manuscript.getTitle()}"></a>
-    <p th:text="'Цена: ' + ${manuscript.getDating()}"></p>
-    <hr>
-</div>
+    </div>
 </main>
 <footer>
     <div class="footerLogo">TOCHMAC</div>
     <p>
         śanmausa ñäkcyeṃ yetweṃtsa yaitu vājr eṃṅku ṣarnene • ylaiñäktñe weṣsa karpāsta wrocce telkine
-        <br />
+        <br/>
         wismai klyautkasta brāhmaññai wertsyai po śaiṣṣe • yāṯaṣṣeñcai ilaiñakteṃ po ylaiñäktents āṣtsa pralyu yparwe
     </p>
 </footer>

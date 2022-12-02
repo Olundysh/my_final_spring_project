@@ -24,7 +24,6 @@ public class UserController {
 
     private final SelectionRepository selectionRepository;
     private final FavouritesRepository favouritesRepository;
-
     private final ManuscriptService manuscriptService;
 
     public UserController(SelectionRepository selectionRepository, FavouritesRepository favouritesRepository, ManuscriptService manuscriptService) {
@@ -41,8 +40,7 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
         String role = personDetails.getPerson().getRole();
-        if(role.equals("ROLE_ADMIN"))
-        {
+        if (role.equals("ROLE_ADMIN")) {
             return "redirect:/admin";
         }
         model.addAttribute("manuscripts", manuscriptService.getAllManuscript());
@@ -50,7 +48,7 @@ public class UserController {
     }
 
     @GetMapping("/favourites/add/{id}")
-    public String addManuscriptInFavourites(@PathVariable("id") int id, Model model){
+    public String addManuscriptInFavourites(@PathVariable("id") int id, Model model) {
         Manuscript manuscript = manuscriptService.getManuscriptId(id);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
@@ -61,7 +59,7 @@ public class UserController {
     }
 
     @GetMapping("/favourites")
-    public String favourites(Model model){
+    public String favourites(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
         int id_person = personDetails.getPerson().getId();
@@ -81,7 +79,7 @@ public class UserController {
     }
 
     @GetMapping("/favourites/delete/{id}")
-    public String deleteManuscriptFavourites(Model model, @PathVariable("id") int id){
+    public String deleteManuscriptFavourites(Model model, @PathVariable("id") int id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
         int id_person = personDetails.getPerson().getId();
@@ -90,7 +88,7 @@ public class UserController {
     }
 
     @GetMapping("/selection/create")
-    public String selection(){
+    public String selection() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
         int id_person = personDetails.getPerson().getId();
@@ -101,14 +99,10 @@ public class UserController {
             manuscriptsList.add(manuscriptService.getManuscriptId(favourites.getManuscriptId()));
         }
 
-        float dating = 0;
-        for (Manuscript manuscript : manuscriptsList){
-            dating += manuscript.getDating();
-        }
 
         String uuid = UUID.randomUUID().toString();
-        for (Manuscript manuscript : manuscriptsList){
-            Selection newSelection = new Selection(uuid, manuscript, personDetails.getPerson(), 1, manuscript.getDating(), Status.Получен);
+        for (Manuscript manuscript : manuscriptsList) {
+            Selection newSelection = new Selection(uuid, manuscript, personDetails.getPerson(), manuscript.getDating(), Status.Order_has_been_transmitted_to_the_reading_room);
             selectionRepository.save(newSelection);
             favouritesRepository.deleteFavouritesByManuscriptId(manuscript.getId());
         }
@@ -116,7 +110,7 @@ public class UserController {
     }
 
     @GetMapping("/selection")
-    public String selectionUser(Model model){
+    public String selectionUser(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
         List<Selection> selectionList = selectionRepository.findByPerson(personDetails.getPerson());

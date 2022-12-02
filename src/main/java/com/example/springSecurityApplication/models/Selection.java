@@ -27,7 +27,7 @@ public class Selection {
 
     private Status status;
 
-    // Будем заполнять дату и время при создании объекта класса
+    // Будем заполнять дату и время при создании объекта класса:
     @PrePersist
     private void init(){
         dateTime = LocalDateTime.now();
@@ -57,13 +57,6 @@ public class Selection {
         this.person = person;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
 
     public int getDating() {
         return dating;
@@ -84,11 +77,10 @@ public class Selection {
     public Selection() {
     }
 
-    public Selection(String number, Manuscript manuscript, Person person, int count, int dating, Status status) {
+    public Selection(String number, Manuscript manuscript, Person person, int dating, Status status) {
         this.number = number;
         this.manuscript = manuscript;
         this.person = person;
-        this.count = count;
         this.dating = dating;
         this.status = status;
     }

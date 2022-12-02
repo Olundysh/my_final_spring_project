@@ -19,7 +19,6 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin")
-//@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 public class AdminController {
 
     @Value("${upload.path}")
@@ -35,36 +34,33 @@ public class AdminController {
         this.categoryRepository = categoryRepository;
     }
 
-    //    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+    // Метод по отображению страницы админа:
     @GetMapping("")
-    public String admin(Model model){
+    public String admin(Model model) {
         model.addAttribute("manuscripts", manuscriptService.getAllManuscript());
         return "admin/admin";
     }
 
-    // http:8080/localhost/admin/manuscript/add
-    // Метод по отображению страницы с возможностью добавления товаров
+    // Метод по отображению страницы с возможностью добавления рукописей:
     @GetMapping("/manuscript/add")
-    public String addManuscript(Model model){
+    public String addManuscript(Model model) {
         model.addAttribute("manuscript", new Manuscript());
         model.addAttribute("category", categoryRepository.findAll());
         return "manuscript/addManuscript";
     }
 
-    // Метод по добавлению продукта в БД через сервис->репозиторий
+    // Метод по добавлению рукописи в БД через сервис->репозиторий (с одной фотографией; добавление еще 4х фотографий закомменчено за ненадобностью.
     @PostMapping("/manuscript/add")
-    public String addManuscript(@ModelAttribute("manuscript") @Valid Manuscript manuscript, BindingResult bindingResult, @RequestParam("file_one")MultipartFile file_one
+    public String addManuscript(@ModelAttribute("manuscript") @Valid Manuscript manuscript, BindingResult bindingResult, @RequestParam("file_one") MultipartFile file_one
 //                                @RequestParam("file_two")MultipartFile file_two, @RequestParam("file_three")MultipartFile file_three, @RequestParam("file_four")MultipartFile file_four, @RequestParam("file_five") MultipartFile file_five
     ) throws IOException {
-        if(bindingResult.hasErrors())
-        {
+        if (bindingResult.hasErrors()) {
             return "manuscript/addManuscript";
         }
 
-        if(file_one != null)
-        {
+        if (file_one != null) {
             File uploadDir = new File(uploadPath);
-            if(!uploadDir.exists()){
+            if (!uploadDir.exists()) {
                 uploadDir.mkdir();
             }
             String uuidFile = UUID.randomUUID().toString();
@@ -138,33 +134,30 @@ public class AdminController {
 //
         manuscriptService.saveManuscript(manuscript);
         return "redirect:/admin";
-   }
+    }
 
+    // Метод по удалению рукописи:
     @GetMapping("/manuscript/delete/{id}")
-    public String deleteManuscript(@PathVariable("id") int id){
+    public String deleteManuscript(@PathVariable("id") int id) {
         manuscriptService.deleteManuscript(id);
         return "redirect:/admin";
     }
 
-    // Метод по отображению страницы с возможностью редактирования рукописей
+    // Метод по отображению страницы с возможностью редактирования рукописи:
     @GetMapping("/manuscript/edit/{id}")
-    public String editManuscript(Model model, @PathVariable("id") int id){
+    public String editManuscript(Model model, @PathVariable("id") int id) {
         model.addAttribute("manuscript", manuscriptService.getManuscriptId(id));
         model.addAttribute("category", categoryRepository.findAll());
         return "manuscript/editManuscript";
     }
 
-    // Метод по редактированию рукописи
+    // Метод для отправки формы с отредактированной рукописью:
     @PostMapping("/manuscript/edit/{id}")
-    public String editManuscript(@ModelAttribute("manuscript") @Valid Manuscript manuscript, BindingResult bindingResult, @PathVariable("id") int id){
-        if(bindingResult.hasErrors())
-        {
+    public String editManuscript(@ModelAttribute("manuscript") @Valid Manuscript manuscript, BindingResult bindingResult, @PathVariable("id") int id) {
+        if (bindingResult.hasErrors()) {
             return "manuscript/editManuscript";
         }
         manuscriptService.updateManuscript(id, manuscript);
         return "redirect:/admin";
     }
-
-
-
 }

@@ -1,0 +1,18 @@
+.favourites_section{
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    justify-self: center;
+    height: 400px;
+    margin-bottom: 40px;
+}
+.favourites_button{
+    display: grid;
+    grid-column-start: 5;
+    grid-row-start: 1;
+    justify-self: center;
+    height: 20px;
+    margin-bottom: 40px;
+}

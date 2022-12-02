@@ -1,0 +1,18 @@
+.library_header{
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+.library_section {
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-start: 5;
+    justify-content: left;
+    margin-left: 20px;
+}

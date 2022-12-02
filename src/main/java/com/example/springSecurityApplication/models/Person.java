@@ -2,7 +2,9 @@ package com.example.springSecurityApplication.models;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -14,16 +16,16 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotEmpty(message = "Логин не может быть пустым")
-    @Size(min = 5, max = 100, message = "Логин должен быть от 5 до 100 символов")
+    @NotEmpty(message = "Login cannot be empty.")
+    @Size(min = 5, max = 20, message = "Login must be from 5 to 20 symbols.")
     @Column(name = "login")
     private String login;
 
-    @NotEmpty(message = "Пароль не может быть пустым")
-//    @Size(min = 5, max = 100, message = "Паро должен быть от 5 до 100 символов")
+    @NotEmpty(message = "Password cannot be empty.")
     @Column(name = "password")
-//    @Max(value = 100, message = "Пароль не может быть больше 100 символов")
-//    @Pattern(regexp = "(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$", message = "Пароль должен содержать не менее 8 символов, хотя бы одну цифру, спец символ, букву в верхнем регистре и в нижнем регистре")
+    @Max(value = 20, message = "Password must be less then 20 symbols.")
+    // Проверка с регулярным выражением временно отключена.
+//    @Pattern(regexp = "(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$", message = "Password must contain not less than eight characters including uppercase and lowercase as well as at least one digit and special symbol.")
     private String password;
 
     @Column(name = "role")
@@ -37,7 +39,6 @@ public class Person {
     private List<Selection> selectionList;
 
     public Person() {
-
 
     }
 

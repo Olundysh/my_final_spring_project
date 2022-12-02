@@ -15,23 +15,23 @@ public class Manuscript {
     private int id;
 
     @Column(name = "title", nullable = false, columnDefinition = "text", unique = true)
-    @NotEmpty(message = "Наименование товара не может быть пустым")
+    @NotEmpty(message = "Title cannot be empty.")
     private String title;
 
     @Column(name = "description", nullable = false, columnDefinition = "text")
-    @NotEmpty(message = "Описание товара не может быть пустым")
+    @NotEmpty(message = "Description cannot be empty.")
     private String description;
 
     @Column(name = "dating", nullable = false)
-    @Min(value = 1, message = "Цена не может быть отрицательной или нулевой")
+    @Min(value = 4, message = "Dating cannot be negative. The earliest manuscripts date back to the 4th century. ")
     private int dating;
 
     @Column(name = "collection", nullable = false)
-    @NotEmpty(message = "Склад по нахождению товара не может быть пустым")
+    @NotEmpty(message = "Collection cannot be empty.")
     private String collection;
 
-    @Column(name = "publications", nullable = false,columnDefinition = "text")
-    @NotEmpty(message = "Информация о продавце не может быть пустым")
+    @Column(name = "publications", nullable = false, columnDefinition = "text")
+    @NotEmpty(message = "If there are no any other publications 'TOCHMAC' must be mentioned")
     private String publications;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "manuscript")
@@ -41,9 +41,9 @@ public class Manuscript {
     @ManyToOne(optional = false)
     private Category category;
 
-    // Будем заполнять дату и время при создании объекта класса
+    // Будем заполнять дату и время при создании объекта класса:
     @PrePersist
-    private void init(){
+    private void init() {
         dateTime = LocalDateTime.now();
     }
 
@@ -54,8 +54,8 @@ public class Manuscript {
     @OneToMany(mappedBy = "manuscript")
     private List<Selection> selectionList;
 
-    // Метод по добавлению фотографий в лист к текущему продукту
-    public void addImageToManuscript(Image image){
+    // Метод по добавлению фотографий в лист к текущему продукту:
+    public void addImageToManuscript(Image image) {
         image.setManuscript(this);
         imageList.add(image);
     }

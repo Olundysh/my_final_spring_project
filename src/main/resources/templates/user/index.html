@@ -40,14 +40,14 @@
     </div>
 
     <div class="manuscript_section">
-        <h3>OUR MANUSCRIPTS: </h3>
+        <h3 class="manuscripts_header">OUR MANUSCRIPTS: </h3>
         <div th:each="manuscript : ${manuscripts}">
             <img th:src="'/img/' + ${manuscript.imageList[0].getFileName()}" width="300px">
             <br>
-            <a class="manuscript_description" th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}" th:text="${manuscript.getTitle()}"></a>
-            <br>
+            <a class="manuscript_description" th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}" th:text="'Shelf Number: ' + ${manuscript.getTitle()}"></a>
             <br>
             <p class="manuscript_description" th:text="'Dating: ' + ${manuscript.getDating()} + 'th century'"></p>
+            <br>
             <br>
             <a class="manuscript_description" th:href="@{/favourites/add/{id}(id=${manuscript.getId()})}">Select to the Favourites</a>
         </div>

@@ -11,7 +11,7 @@ import java.util.List;
 @Transactional
 public interface FavouritesRepository extends JpaRepository<Favourites, Integer> {
 
-    // Получаем корзину по id пользователя
+    // Получаем Favourites по id пользователя:
     List<Favourites> findByPersonId(int id);
 
     void deleteFavouritesByManuscriptId(int id);
