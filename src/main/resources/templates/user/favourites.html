@@ -31,7 +31,7 @@
         <img th:src="'/img/' + ${manuscript.imageList[0].getFileName()}" width="300px">
         <br>
         <a class="manuscript_description" th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}"
-           th:text="${manuscript.getTitle()}"></a>
+           th:text="'Shelf Number: ' + ${manuscript.getTitle()}"></a>
         <p class="manuscript_description" th:text="'Dating: ' + ${manuscript.getDating()} + 'th century'"></p>
         <a class="manuscript_description" th:href="@{/favourites/delete/{id}(id=${manuscript.getId()})}">Remove from
             Favourites</a>

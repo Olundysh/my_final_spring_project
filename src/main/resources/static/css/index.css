@@ -9,10 +9,12 @@
     justify-self: center;
     /*height: 400px;*/
     margin-bottom: 80px;
+    padding-bottom: 20px;
     color: #4551bb;
     font-size: large;
     font-weight: bold;
     line-height: 10px;
+    row-gap: 20px;
 }
 
 .manuscripts_header {

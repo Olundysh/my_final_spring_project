@@ -5,7 +5,6 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/shared.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/manuscript.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
@@ -27,8 +26,7 @@
 
 </header>
 <main>
-    <h3>Edit manuscript</h3>
-    <form th:method="POST" th:action="@{/admin/manuscript/edit/{id}(id=${manuscript.getId()})}"
+    <form class="edit_manuscript"  th:method="POST" th:action="@{/admin/manuscript/edit/{id}(id=${manuscript.getId()})}"
           th:object="${manuscript}">
         <label for="title">Enter manuscript title: </label>
         <input type="text" th:field="*{title}" placeholder="Title" id="title">
@@ -61,7 +59,7 @@
                 <option th:text="${element.getName()}" th:value="${element.getId()}"></option>
             </div>
         </select>
-        <input type="submit" value="Edit">
+        <input class="admin_btn" type="submit" value="Edit">
     </form>
 </main>
 <footer>

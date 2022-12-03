@@ -36,7 +36,7 @@
   <p th:text="'Shelf Number: ' + ${selection.getManuscript().getTitle()}"></p>
   <p th:text="'Dating: ' + ${selection.getDating()} + 'th century'"></p>
   <p th:text="'Selected to the Library: ' + ${#temporals.format(selection.getDateTime(), 'dd-MM-yyyy')}"></p>
-  <p th:text="'Status: ' + ${selection.getStatus()}">
+  <p  style="color: red" th:text="'Status: ' + ${selection.getStatus()}">
 </div>
 </main>
 <footer>

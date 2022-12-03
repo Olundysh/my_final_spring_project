@@ -5,7 +5,6 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/shared.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/manuscript.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
@@ -27,8 +26,7 @@
 
 </header>
 <main>
-    <h3>Добавление товаров</h3>
-    <form th:method="POST" th:action="@{/admin/manuscript/add}" th:object="${manuscript}" enctype="multipart/form-data">
+    <form class="edit_manuscript" th:method="POST" th:action="@{/admin/manuscript/add}" th:object="${manuscript}" enctype="multipart/form-data">
         <label for="title">Enter manuscript title: </label>
         <input type="text" th:field="*{title}" placeholder="Title" id="title">
         <div style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
@@ -63,12 +61,18 @@
         <br>
 <!--        <p style="color: red">Вы можете добавить до 5 фотографий. Первая фотография не может быть пустой т.к она будет-->
 <!--            являться главной</p>-->
-        <input type="file" name="file_one">
+
+        <input type="file" name="file_one" accept="image/*" id="actual-btn" hidden/>
+        <!-- our custom upload button -->
+        <label class="image_btn" for="actual-btn">Choose File</label>
+        <!-- name of file chosen -->
+        <span id="file-chosen">No file chosen</span>
+<!--        <input  class="admin_btn" type="file" name="file_one">-->
         <!--        <input type="file" name="file_two">-->
         <!--        <input type="file" name="file_three">-->
         <!--        <input type="file" name="file_four">-->
         <!--        <input type="file" name="file_five">-->
-        <input type="submit" value="Add">
+        <input class="image_btn" type="submit" value="Add">
     </form>
 </main>
 <footer>

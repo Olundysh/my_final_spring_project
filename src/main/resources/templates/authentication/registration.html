@@ -9,10 +9,11 @@
             rel="stylesheet"
     />
     <link rel="stylesheet" type="text/css" th:href="@{/css/shared.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/loginRegistration.css}">
     <title>Registration</title>
 </head>
 <body>
-<h3>Registration</h3>
+<main>
 <form method="post" th:action="@{/authentication/registration}" th:object="${person}">
     <label for="username">Enter login: </label><br>
     <input type="text" th:field="*{login}" placeholder="Your login" name="username" id="username">
@@ -23,11 +24,12 @@
     <input type="password" th:field="*{password}" placeholder="Your password" name="password" id="password">
     <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
     <br>
-    <input type="submit" value="Registration">
+    <input class="banner_btn" type="submit" value="Registration">
     <div th:if="${param.error}" style="color: red">
         Wrong login or password
     </div>
 </form>
-<a href="/authentication/login">Authentication</a>
+<a class="banner_btn" href="/authentication/login">Authentication</a>
+</main>
 </body>
 </html>

@@ -136,8 +136,7 @@ main{
     grid-template-rows: repeat(4, auto);
     justify-items: stretch;
     position: relative;
-    margin: 100px 0 20px 0;
-    /*height: calc(100vh - 100px);*/
+    margin: 80px 0 20px 0;
 }
 .banner_section{
     display: grid;

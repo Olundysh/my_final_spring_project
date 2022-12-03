@@ -26,19 +26,25 @@
 
 </header>
 <main>
-    <h3>Admin Dashboard</h3>
+    <h3 class="admin_header">Admin Dashboard</h3>
 
-    <a href="admin/manuscript/add">Add manuscript</a>
-    <hr>
-    <div th:each="manuscript : ${manuscripts}">
-        <p th:text="'Shelf Number: ' + ${manuscript.getTitle()}"></p>
-        <p th:text="'Description: ' + ${manuscript.getDescription()}"></p>
-        <p th:text="'Dating: ' + ${manuscript.getDating()} + 'th century'"></p>
-        <p th:text="'Collection: ' + ${manuscript.getCollection()}"></p>
-        <p th:text="'Publications: ' + ${manuscript.getPublications()}"></p>
-        <a th:href="@{/admin/manuscript/edit/{id}(id=${manuscript.getId()})}">Edit manuscript</a>
-        <a th:href="@{/admin/manuscript/delete/{id}(id=${manuscript.getId()})}">Delete manuscript</a>
-        <hr>
+    <a class="add_manuscript" href="admin/manuscript/add">Add manuscript</a>
+
+    <div class="admin_mss_section">
+        <h3 class="available_mss_header">Available manuscripts</h3>
+        <div th:each="manuscript : ${manuscripts}">
+            <div class="mss_card">
+                <p th:text="'Shelf Number: ' + ${manuscript.getTitle()}"></p>
+                <p th:text="'Description: ' + ${manuscript.getDescription()}"></p>
+                <p th:text="'Dating: ' + ${manuscript.getDating()} + 'th century'"></p>
+                <p th:text="'Collection: ' + ${manuscript.getCollection()}"></p>
+                <p th:text="'Publications: ' + ${manuscript.getPublications()}"></p>
+                <p th:text="'Category: ' + ${manuscript.getCategory().getName()}"></p>
+                <a class="admin_btn" th:href="@{/admin/manuscript/edit/{id}(id=${manuscript.getId()})}">Edit manuscript</a>
+
+                <a class="admin_btn" th:href="@{/admin/manuscript/delete/{id}(id=${manuscript.getId()})}">Delete manuscript</a>
+            </div>
+        </div>
     </div>
 </main>
 <footer>

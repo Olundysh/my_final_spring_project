@@ -1,3 +1,7 @@
+main{
+    padding: 50px;
+}
+
 .library_header{
     display: grid;
     grid-column-start: 1;
