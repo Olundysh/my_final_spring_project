@@ -41,9 +41,9 @@ public class ManuscriptController {
                         if (contact.equals("udanavarga")) {
                             model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByDatingAsc(search.toLowerCase(), Integer.parseInt(ot), Integer.parseInt(Do), 1));
                         } else if (contact.equals("udanalankara")) {
-                            model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByDatingAsc(search.toLowerCase(), Integer.parseInt(ot), Integer.parseInt(Do), 2));
-                        } else if (contact.equals("udanastotra")) {
                             model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByDatingAsc(search.toLowerCase(), Integer.parseInt(ot), Integer.parseInt(Do), 3));
+                        } else if (contact.equals("udanastotra")) {
+                            model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByDatingAsc(search.toLowerCase(), Integer.parseInt(ot), Integer.parseInt(Do), 2));
                         }
                     }
                 } else if (dating.equals("sorted_by_descending_dating")) {
@@ -51,9 +51,9 @@ public class ManuscriptController {
                         if (contact.equals("udanavarga")) {
                             model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByDatingDesc(search.toLowerCase(), Integer.parseInt(ot), Integer.parseInt(Do), 1));
                         } else if (contact.equals("udanalankara")) {
-                            model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByDatingDesc(search.toLowerCase(), Integer.parseInt(ot), Integer.parseInt(Do), 2));
-                        } else if (contact.equals("udanastotra")) {
                             model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByDatingDesc(search.toLowerCase(), Integer.parseInt(ot), Integer.parseInt(Do), 3));
+                        } else if (contact.equals("udanastotra")) {
+                            model.addAttribute("search_manuscript", manuscriptRepository.findByTitleAndCategoryOrderByDatingDesc(search.toLowerCase(), Integer.parseInt(ot), Integer.parseInt(Do), 2));
                         }
                     }
                 }
@@ -79,9 +79,9 @@ public class ManuscriptController {
                         if (contact.equals("udanavarga")) {
                             model.addAttribute("search_manuscript", manuscriptRepository.findByCategory(1));
                         } else if (contact.equals("udanalankara")) {
-                            model.addAttribute("search_manuscript", manuscriptRepository.findByCategory(2));
-                        } else if (contact.equals("udanastotra")) {
                             model.addAttribute("search_manuscript", manuscriptRepository.findByCategory(3));
+                        } else if (contact.equals("udanastotra")) {
+                            model.addAttribute("search_manuscript", manuscriptRepository.findByCategory(2));
                         }
                     }
         model.addAttribute("manuscripts", manuscriptService.getAllManuscript());

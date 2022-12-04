@@ -34,7 +34,8 @@
             <p class="text_banner">
                 Tocharian <br/> <span>manuscript culture</span>
                 <br/>
-                <a style="color: whitesmoke" class="banner_btn" href="https://en.wikipedia.org/wiki/Tocharians" target="_blank">Learn more</a>
+                <a style="color: whitesmoke" class="banner_btn" href="https://en.wikipedia.org/wiki/Tocharians"
+                   target="_blank">Learn more</a>
             </p>
         </div>
     </div>
@@ -72,13 +73,23 @@
                         <label for="do">To</label>
                         <input type="text" name="do" id="do" placeholder="8th century">
                         <div>
-                            <label for="ascending_dating">From old to new</label>
+                            <label for="ascending_dating">From ancient to modern</label>
                             <input type="radio" id="ascending_dating" name="dating" value="sorted_by_ascending_dating">
                             <br>
                             <br>
-                            <label for="descending_dating">From new to old</label>
+                            <label for="descending_dating">From modern to ancient</label>
                             <input type="radio" id="descending_dating" name="dating"
                                    value="sorted_by_descending_dating">
+                            <br>
+                            <br>
+                            <label for="udanavarga1">Udānavarga </label>
+                            <input type="radio" id="udanavarga1" name="contact" value="udanavarga">
+
+                            <label for="udanastotra1">Udānastotra </label>
+                            <input type="radio" id="udanastotra1" name="contact" value="udanastotra">
+
+                            <label for="udanalankara1">Udānālaṅkara </label>
+                            <input type="radio" id="udanalankara1" name="contact" value="udanalankara">
                             <br>
                             <br>
                             <input type="submit" value="Search" class="banner_btn">
@@ -91,14 +102,13 @@
                 <form th:method="POST" th:action="@{/manuscript/search_category}">
                     <fieldset class="category_manuscript_search">
                         <label for="udanavarga">Udānavarga </label>
+                        <input type="radio" id="udanavarga" name="contact" value="udanavarga">
 
-                        <input  type="radio" id="udanavarga" name="contact" value="udanavarga">
-<!--                        <br>-->
+                        <label for="udanastotra">Udānastotra </label>
+                        <input type="radio" id="udanastotra" name="contact" value="udanastotra">
+
                         <label for="udanalankara">Udānālaṅkara </label>
                         <input type="radio" id="udanalankara" name="contact" value="udanalankara">
-<!--                        <br>-->
-                        <label for="udanastotra">Udānastotra </label>
-                        <input  type="radio" id="udanastotra" name="contact" value="udanastotra">
                         <br>
 
                         <input type="submit" value="Search" class="banner_btn">

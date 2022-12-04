@@ -1,7 +1,4 @@
 
-
-
-
 .result_header {
     grid-column-start: 1;
     grid-column-end: 5;
@@ -10,13 +7,13 @@
     justify-content: left;
 }
 
-.result_section, .edit_manuscript {
+.result_section{
     display: grid;
     grid-column-start: 2;
     grid-column-end: 4;
     grid-row-start: 1;
     justify-content: space-between;
-    margin: 20px;
+    margin: 80px;
     color: #4551bb;
     font-size: large;
     font-weight: bold;
