@@ -33,6 +33,14 @@ public class Selection {
         dateTime = LocalDateTime.now();
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNumber() {
         return number;
     }
@@ -57,6 +65,13 @@ public class Selection {
         this.person = person;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 
     public int getDating() {
         return dating;
@@ -76,6 +91,7 @@ public class Selection {
 
     public Selection() {
     }
+
 
     public Selection(String number, Manuscript manuscript, Person person, int dating, Status status) {
         this.number = number;

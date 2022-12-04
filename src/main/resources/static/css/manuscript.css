@@ -1,21 +1,6 @@
 
 
-.result_selection_section {
-    display: grid;
-    grid-column-start: 1;
-    grid-column-end: 1;
-    grid-row-start: 1;
-    grid-row-end: 1;
-    justify-self: end;
-    align-content: start;
-    width: fit-content;
-    padding: 20px 100px 0 0;
-    color: #4551bb;
-    font-size: large;
-    font-weight: bold;
-    line-height: 25px;
-    row-gap: 50px;
-}
+
 
 .result_header {
     grid-column-start: 1;

@@ -94,7 +94,7 @@ public class UserController {
         int id_person = personDetails.getPerson().getId();
         List<Favourites> favouritesList = favouritesRepository.findByPersonId(id_person);
         List<Manuscript> manuscriptsList = new ArrayList<>();
-        // Получаем продукты из корзины по id
+        // Получаем продукты из favourites по id
         for (Favourites favourites : favouritesList) {
             manuscriptsList.add(manuscriptService.getManuscriptId(favourites.getManuscriptId()));
         }
@@ -102,7 +102,7 @@ public class UserController {
 
         String uuid = UUID.randomUUID().toString();
         for (Manuscript manuscript : manuscriptsList) {
-            Selection newSelection = new Selection(uuid, manuscript, personDetails.getPerson(), manuscript.getDating(), Status.Order_has_been_transmitted_to_the_reading_room);
+            Selection newSelection = new Selection(uuid, manuscript, personDetails.getPerson(), manuscript.getDating(), Status.Order_accepted);
             selectionRepository.save(newSelection);
             favouritesRepository.deleteFavouritesByManuscriptId(manuscript.getId());
         }

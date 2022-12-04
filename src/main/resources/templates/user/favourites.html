@@ -10,7 +10,7 @@
     />
     <link rel="stylesheet" type="text/css" th:href="@{/css/shared.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/favourites.css}">
-    <title>Главная страница</title>
+    <title>Favourites</title>
 </head>
 <body>
 <header>
@@ -26,15 +26,18 @@
         </form>
     </nav>
 </header>
-<main >
-    <div class="favourites_section" th:each="manuscript : ${favourites_manuscript}">
-        <img th:src="'/img/' + ${manuscript.imageList[0].getFileName()}" width="300px">
-        <br>
-        <a class="manuscript_description" th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}"
-           th:text="'Shelf Number: ' + ${manuscript.getTitle()}"></a>
-        <p class="manuscript_description" th:text="'Dating: ' + ${manuscript.getDating()} + 'th century'"></p>
-        <a class="manuscript_description" th:href="@{/favourites/delete/{id}(id=${manuscript.getId()})}">Remove from
-            Favourites</a>
+<main>
+    <div class="favourites_section">
+        <h3 class="favourites_header">CHOSEN MANUSCRIPTS: </h3>
+        <div th:each="manuscript : ${favourites_manuscript}">
+            <img th:src="'/img/' + ${manuscript.imageList[0].getFileName()}" width="300px">
+            <br>
+            <a class="manuscript_description" th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}"
+               th:text="'Shelf Number: ' + ${manuscript.getTitle()}"></a>
+            <p class="manuscript_description" th:text="'Dating: ' + ${manuscript.getDating()} + 'th century'"></p>
+            <a class="manuscript_description" th:href="@{/favourites/delete/{id}(id=${manuscript.getId()})}">Remove from
+                Favourites</a>
+        </div>
     </div>
     <div class="favourites_button">
         <a class="banner_btn" href="/selection/create">Send to my Library</a>

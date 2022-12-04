@@ -34,7 +34,7 @@
             <p class="text_banner">
                 Tocharian <br/> <span>manuscript culture</span>
                 <br/>
-                <button class="banner_btn">Learn more</button>
+                <a style="color: whitesmoke" class="banner_btn" href="https://en.wikipedia.org/wiki/Tocharians" target="_blank">Learn more</a>
             </p>
         </div>
     </div>
@@ -44,53 +44,74 @@
         <div th:each="manuscript : ${manuscripts}">
             <img th:src="'/img/' + ${manuscript.imageList[0].getFileName()}" width="300px">
             <br>
-            <a class="manuscript_description" th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}" th:text="'Shelf Number: ' + ${manuscript.getTitle()}"></a>
+            <a class="manuscript_description" th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}"
+               th:text="'Shelf Number: ' + ${manuscript.getTitle()}"></a>
             <br>
             <p class="manuscript_description" th:text="'Dating: ' + ${manuscript.getDating()} + 'th century'"></p>
             <br>
             <br>
-            <a class="manuscript_description" th:href="@{/favourites/add/{id}(id=${manuscript.getId()})}">Select to the Favourites</a>
+            <a class="manuscript_description" th:href="@{/favourites/add/{id}(id=${manuscript.getId()})}">Select to the
+                Favourites</a>
         </div>
     </div>
 
     <div class="selection_section">
+        <legend style="color: rgb(57, 63, 133)">SELECT SORTING OPTIONS:</legend>
+        <div>
+            <div>
+                <form th:method="POST" th:action="@{/manuscript/search}">
+                    <fieldset class="manuscript_search">
 
-        <form th:method="POST" th:action="@{/manuscript/search}">
-            <fieldset class="manuscript_search">
-                <legend>SELECT SORTING OPTIONS:</legend>
-                <br>
-                <label for="search">Searching by name</label>
-                <input name="search" id="search" placeholder="Enter a title">
-                <br>
-                <p>Searching by dating</p>
-                <label for="ot">From</label>
-                <input type="text" name="ot" id="ot" placeholder="5th century">
-                <label for="do">To</label>
-                <input type="text" name="do" id="do" placeholder="8th century">
-                <div>
-                    <label for="ascending_dating">From old to new</label>
-                    <input type="radio" id="ascending_dating" name="dating" value="sorted_by_ascending_dating">
-                    <br>
-                    <br>
-                    <label for="descending_dating">From new to old</label>
-                    <input type="radio" id="descending_dating" name="dating" value="sorted_by_descending_dating">
-                    <br>
-                    <br>
-                    <br>
+                        <br>
+                        <label for="search">Searching by Shelf Number</label>
+                        <input name="search" id="search" placeholder="Enter a Shelf Number">
 
-                    <label for="udanavarga">Udānavarga  </label>
-                    <input type="radio" id="udanavarga" name="contact" value="udanavarga">
-                    <label for="udanalankara">Udānālaṅkara  </label>
-                    <input type="radio" id="udanalankara" name="contact" value="udanalankara">
-                    <label for="udanastotra">Udānastotra  </label>
-                    <input type="radio" id="udanastotra" name="contact" value="udanastotra">
+                        <p>Searching by dating</p>
+                        <label for="ot">From</label>
+                        <input type="text" name="ot" id="ot" placeholder="5th century">
+                        <label for="do">To</label>
+                        <input type="text" name="do" id="do" placeholder="8th century">
+                        <div>
+                            <label for="ascending_dating">From old to new</label>
+                            <input type="radio" id="ascending_dating" name="dating" value="sorted_by_ascending_dating">
+                            <br>
+                            <br>
+                            <label for="descending_dating">From new to old</label>
+                            <input type="radio" id="descending_dating" name="dating"
+                                   value="sorted_by_descending_dating">
+                            <br>
+                            <br>
+                            <input type="submit" value="Search" class="banner_btn">
+                        </div>
+                    </fieldset>
                     <br>
-                    <input type="submit" value="Search" class="banner_btn">
-                </div>
-            </fieldset>
-            <br>
-        </form>
+                </form>
+            </div>
+            <div class="category_selection_section">
+                <form th:method="POST" th:action="@{/manuscript/search_category}">
+                    <fieldset class="category_manuscript_search">
+                        <label for="udanavarga">Udānavarga </label>
+
+                        <input  type="radio" id="udanavarga" name="contact" value="udanavarga">
+<!--                        <br>-->
+                        <label for="udanalankara">Udānālaṅkara </label>
+                        <input type="radio" id="udanalankara" name="contact" value="udanalankara">
+<!--                        <br>-->
+                        <label for="udanastotra">Udānastotra </label>
+                        <input  type="radio" id="udanastotra" name="contact" value="udanastotra">
+                        <br>
+
+                        <input type="submit" value="Search" class="banner_btn">
+
+                    </fieldset>
+                    <br>
+                </form>
+            </div>
+        </div>
+
     </div>
+
+
 </main>
 <footer>
     <form method="get" th:action="@{/selection}">

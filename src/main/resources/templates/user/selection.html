@@ -29,15 +29,17 @@
   </nav>
 </header>
 <main>
+  <div class="library_section">
 <h3 class="library_header">My library</h3>
-<div class="library_section" th:each="selection : ${selection}">
-  <p th:text="'Order № ' + ${selection.getNumber()}"></p>
-  <img th:src="'/img/' + ${selection.getManuscript().imageList[0].getFileName()}" width="300px">
-  <p th:text="'Shelf Number: ' + ${selection.getManuscript().getTitle()}"></p>
-  <p th:text="'Dating: ' + ${selection.getDating()} + 'th century'"></p>
-  <p th:text="'Selected to the Library: ' + ${#temporals.format(selection.getDateTime(), 'dd-MM-yyyy')}"></p>
-  <p  style="color: red" th:text="'Status: ' + ${selection.getStatus()}">
+<div  th:each="selections : ${selection}">
+  <p th:text="'Order № ' + ${selections.getNumber()}"></p>
+  <img th:src="'/img/' + ${selections.getManuscript().imageList[0].getFileName()}" width="300px">
+  <p th:text="'Shelf Number: ' + ${selections.getManuscript().getTitle()}"></p>
+  <p th:text="'Dating: ' + ${selections.getDating()} + 'th century'"></p>
+  <p th:text="'Selected to the Library: ' + ${#temporals.format(selections.getDateTime(), 'dd-MM-yyyy')}"></p>
+  <p  style="color: red" th:text="'Status: ' + ${selections.getStatus()}">
 </div>
+  </div>
 </main>
 <footer>
   <div class="footerLogo">TOCHMAC</div>

@@ -28,39 +28,6 @@
     </nav>
 </header>
 <main>
-    <div class="result_selection_section">
-        <form th:method="POST" th:action="@{/manuscript/search}">
-            <fieldset class="manuscript_search">
-                <legend>SELECT SORTING OPTIONS:</legend>
-                <br>
-                <label for="search">Searching by name</label>
-                <input name="search" id="search" placeholder="Enter a title">
-                <br>
-                <p>Searching by dating</p>
-                <label for="ot">From</label>
-                <input type="text" name="ot" id="ot" placeholder="5th century">
-                <label for="do">To</label>
-                <input type="text" name="do" id="do" placeholder="8th century">
-                <div>
-                    <label for="ascending_dating">From old to new</label>
-                    <input type="radio" id="ascending_dating" name="dating" value="sorted_by_ascending_dating">
-                    <br>
-                    <label for="descending_dating">From new to old</label>
-                    <input type="radio" id="descending_dating" name="dating" value="sorted_by_descending_dating">
-                    <br>
-                    <label for="udanavarga">Udānavarga </label>
-                    <input type="radio" id="udanavarga" name="contact" value="udanavarga">
-                    <label for="udanalankara">Udānālaṅkara </label>
-                    <input type="radio" id="udanalankara" name="contact" value="udanalankara">
-                    <label for="udanastotra">Udānastotra </label>
-                    <input type="radio" id="udanastotra" name="contact" value="udanastotra">
-                    <br>
-                    <input type="submit" value="Search" class="banner_btn">
-                </div>
-            </fieldset>
-            <br>
-        </form>
-    </div>
     <div class="result_section">
         <h3 class="result_header">Search result</h3>
         <div  th:each="manuscript : ${search_manuscript}">
@@ -70,6 +37,7 @@
                 <a th:href="@{/manuscript/info/{id}(id=${manuscript.getId()})}" th:text="${manuscript.getTitle()}"></a>
                 <br>
                 <p class="manuscript_description" th:text="'Dating: ' + ${manuscript.getDating()} + 'th century'"></p>
+                <p th:text="'Category: ' + ${manuscript.getCategory().getName()}"></p>
             </div>
         </div>
     </div>

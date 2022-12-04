@@ -40,6 +40,13 @@
     font-weight: bold;
     line-height: 5px;
 }
+.category_selection_section {
+    padding: 20px 100px 0 0;
+    color: #4551bb;
+    font-size: large;
+    font-weight: bold;
+    margin: 0px;
+}
 
 #search, #ot, #do {
     width: fit-content;
@@ -47,11 +54,38 @@
 
 }
 
+.banner_btn{
+    background: linear-gradient(#8f96db, #6369a1);
+    color: rgb(252, 251, 246);
+    margin: 5px;
+    padding: 5px 10px;
+    width: fit-content;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 5px 5px 5px 0px rgb(39, 38, 38);
+    transition: box-shadow 0.3s ease-out;
+}
+
+.banner_btn:hover{
+    box-shadow: 2px 2px 2px 0px rgb(39, 38, 38);
+}
+
 .manuscript_search {
     display: grid;
     row-gap: 20px;
 }
 
-.banner_btn{
-    margin: 20px auto auto auto;
+.category_manuscript_search{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
+
+
+
+
+
+
+

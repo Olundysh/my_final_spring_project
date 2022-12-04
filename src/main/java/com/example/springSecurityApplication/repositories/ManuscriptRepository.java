@@ -9,26 +9,30 @@ import java.util.List;
 
 public interface ManuscriptRepository extends JpaRepository<Manuscript, Integer> {
 
-    // Находим продукты по части наименования без учета регистра
+    // Находим рукописи по части наименования без учета регистра
     List<Manuscript> findByTitleContainingIgnoreCase(String name);
 
     @Query(value = "select * from manuscript where ((lower(title) LIKE %?1%) or (lower(title) LIKE '?1%') or (lower(title) LIKE '%?1')) and (dating >= ?2 and dating <= ?3)", nativeQuery = true)
     List<Manuscript> findByTitleAndDatingGreaterThanEqualAndDatingLessThanEqual(String title, int ot, int Do);
 
-    // Поиск по наименованию, фильтрация по диапазону цены, сортировка по возрастанию цены
+    // Поиск по наименованию, фильтрация по диапазону датировки, сортировка по возрастанию датировки
     @Query(value = "select * from manuscript where ((lower(title) LIKE %?1%) or (lower(title) LIKE '?1%') or (lower(title) LIKE '%?1')) and (dating >= ?2 and dating <= ?3) order by  dating", nativeQuery = true)
     List<Manuscript> findByTitleOrderByDatingAsc(String title, int ot, int Do);
 
-    // Поиск по наименованию, фильтрация по диапазону цены, сортировка по убыванию цены
+    // Поиск по наименованию, фильтрация по диапазону датировки, сортировка по убыванию датировки
     @Query(value = "select * from manuscript where ((lower(title) LIKE %?1%) or (lower(title) LIKE '?1%') or (lower(title) LIKE '%?1')) and (dating >= ?2 and dating <= ?3) order by  dating desc ", nativeQuery = true)
     List<Manuscript> findByTitleOrderByDatingDest(String title, int ot, int Do);
 
-    // Поиск по наименованию,по категории,  фильтрация по диапазону цены, сортировка по возрастанию цены
+    // Поиск по наименованию,по категории,  фильтрация по диапазону датировки, сортировка по возрастанию датировки
     @Query(value = "select * from manuscript where category_id=?4 and ((lower(title) LIKE %?1%) or (lower(title) LIKE '?1%') or (lower(title) LIKE '%?1')) and (dating >= ?2 and dating <= ?3) order by  dating", nativeQuery = true)
     List<Manuscript> findByTitleAndCategoryOrderByDatingAsc(String title, int ot, int Do, int category);
 
-    // Поиск по наименованию,по категории,  фильтрация по диапазону цены, сортировка по убыванию цены
+    // Поиск по наименованию,по категории,  фильтрация по диапазону датировки, сортировка по убыванию датировки
     @Query(value = "select * from manuscript where category_id=?4 and ((lower(title) LIKE %?1%) or (lower(title) LIKE '?1%') or (lower(title) LIKE '%?1')) and (dating >= ?2 and dating <= ?3) order by  dating desc ", nativeQuery = true)
     List<Manuscript> findByTitleAndCategoryOrderByDatingDesc(String title, int ot, int Do, int category);
+    //Поиск по категории:
+    @Query(value = "select * from manuscript where category_id=?1", nativeQuery = true)
+    List<Manuscript> findByCategory(int category);
+
 }
 

@@ -72,4 +72,24 @@ public class ManuscriptController {
 
     }
 
+
+    @PostMapping("/search_category")
+    public String manuscriptSearch(@RequestParam(value = "contact", required = false, defaultValue = "") String contact, Model model) {
+                    if (!contact.isEmpty()) {
+                        if (contact.equals("udanavarga")) {
+                            model.addAttribute("search_manuscript", manuscriptRepository.findByCategory(1));
+                        } else if (contact.equals("udanalankara")) {
+                            model.addAttribute("search_manuscript", manuscriptRepository.findByCategory(2));
+                        } else if (contact.equals("udanastotra")) {
+                            model.addAttribute("search_manuscript", manuscriptRepository.findByCategory(3));
+                        }
+                    }
+        model.addAttribute("manuscripts", manuscriptService.getAllManuscript());
+        return "manuscript/manuscript";
+
+    }
+
+
+
+
 }
